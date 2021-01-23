@@ -29,52 +29,53 @@ namespace myTTRLauncher
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(myTTRLauncher));
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.helloWorldLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.linkLabel = new System.Windows.Forms.LinkLabel();
+            this.titleLabel = new System.Windows.Forms.Label();
+            this.loginButton = new System.Windows.Forms.Button();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.authTextBox = new System.Windows.Forms.TextBox();
+            this.authLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // linkLabel1
+            // linkLabel
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(178, 371);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(371, 17);
-            this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Click here to go to the offical Toontown Rewritten website.";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabel.AutoSize = true;
+            this.linkLabel.Location = new System.Drawing.Point(318, 374);
+            this.linkLabel.Name = "linkLabel";
+            this.linkLabel.Size = new System.Drawing.Size(117, 17);
+            this.linkLabel.TabIndex = 0;
+            this.linkLabel.TabStop = true;
+            this.linkLabel.Text = "Github repository";
+            this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
-            // helloWorldLabel
+            // titleLabel
             // 
-            this.helloWorldLabel.AutoSize = true;
-            this.helloWorldLabel.BackColor = System.Drawing.Color.Transparent;
-            this.helloWorldLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
-            this.helloWorldLabel.ForeColor = System.Drawing.Color.Indigo;
-            this.helloWorldLabel.Location = new System.Drawing.Point(215, 9);
-            this.helloWorldLabel.Name = "helloWorldLabel";
-            this.helloWorldLabel.Size = new System.Drawing.Size(316, 46);
-            this.helloWorldLabel.TabIndex = 3;
-            this.helloWorldLabel.Text = "myTTRLauncher";
+            this.titleLabel.AutoSize = true;
+            this.titleLabel.BackColor = System.Drawing.Color.Transparent;
+            this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.titleLabel.ForeColor = System.Drawing.Color.Indigo;
+            this.titleLabel.Location = new System.Drawing.Point(215, 9);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(316, 46);
+            this.titleLabel.TabIndex = 3;
+            this.titleLabel.Text = "myTTRLauncher";
             // 
-            // button1
+            // loginButton
             // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.ForeColor = System.Drawing.SystemColors.Window;
-            this.button1.Location = new System.Drawing.Point(598, 322);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 69);
-            this.button1.TabIndex = 2;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.loginButton.BackColor = System.Drawing.Color.Transparent;
+            this.loginButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("loginButton.BackgroundImage")));
+            this.loginButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.loginButton.ForeColor = System.Drawing.SystemColors.Window;
+            this.loginButton.Location = new System.Drawing.Point(598, 322);
+            this.loginButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(104, 69);
+            this.loginButton.TabIndex = 2;
+            this.loginButton.UseVisualStyleBackColor = false;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
             // usernameTextBox
             // 
@@ -110,15 +111,24 @@ namespace myTTRLauncher
             this.passwordLabel.TabIndex = 7;
             this.passwordLabel.Text = "Password: ";
             // 
-            // linkLabel2
+            // authTextBox
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(337, 348);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(90, 17);
-            this.linkLabel2.TabIndex = 8;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Source Code";
+            this.authTextBox.Location = new System.Drawing.Point(321, 304);
+            this.authTextBox.Name = "authTextBox";
+            this.authTextBox.Size = new System.Drawing.Size(114, 22);
+            this.authTextBox.TabIndex = 8;
+            this.authTextBox.Visible = false;
+            // 
+            // authLabel
+            // 
+            this.authLabel.AutoSize = true;
+            this.authLabel.Location = new System.Drawing.Point(309, 284);
+            this.authLabel.Name = "authLabel";
+            this.authLabel.Size = new System.Drawing.Size(137, 17);
+            this.authLabel.TabIndex = 9;
+            this.authLabel.Text = "Authentication token";
+            this.authLabel.Visible = false;
+            this.authLabel.Click += new System.EventHandler(this.Label1_Click_2);
             // 
             // myTTRLauncher
             // 
@@ -128,16 +138,19 @@ namespace myTTRLauncher
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(708, 404);
-            this.Controls.Add(this.linkLabel2);
+            this.Controls.Add(this.authLabel);
+            this.Controls.Add(this.authTextBox);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.usernameLabel);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.usernameTextBox);
-            this.Controls.Add(this.helloWorldLabel);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.linkLabel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Controls.Add(this.titleLabel);
+            this.Controls.Add(this.loginButton);
+            this.Controls.Add(this.linkLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "myTTRLauncher";
             this.Text = "myTTRLauncher";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -148,14 +161,15 @@ namespace myTTRLauncher
 
         #endregion
 
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label helloWorldLabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.LinkLabel linkLabel;
+        private System.Windows.Forms.Label titleLabel;
+        private System.Windows.Forms.Button loginButton;
         private System.Windows.Forms.TextBox usernameTextBox;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.Label passwordLabel;
-        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.TextBox authTextBox;
+        private System.Windows.Forms.Label authLabel;
     }
 }
 

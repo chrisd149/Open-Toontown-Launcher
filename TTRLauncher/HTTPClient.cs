@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using Newtonsoft.Json.Linq;
 using LocalGlobals;
+using myTTRLauncher;
 
 
 namespace HTTPClient
@@ -70,6 +71,10 @@ namespace HTTPClient
                 Globals.queueToken = status.queueToken;
                 Main(Globals.usr, Globals.pws, Convert.ToString(status.success));
             }
+            if (status.success == "partial")
+            {
+                
+            }
             if (status.success == "true")
             {
                 Globals.timeToWait = 0;
@@ -84,8 +89,7 @@ namespace HTTPClient
                 ProcessStartInfo startInfo = new ProcessStartInfo();
 
                 startInfo.FileName = "TTREngine.exe";
-                startInfo.UseShellExecute = false;
-                startInfo.RedirectStandardOutput = true;
+                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                 // Starts game
                 Process.Start(startInfo);
             }
