@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9DAD803B-FE01-490C-8C34-66A92AC624DC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>TTRLauncher</RootNamespace>
-    <AssemblyName>TTRLauncher</AssemblyName>
+    <RootNamespace>OpenTTRLauncher</RootNamespace>
+    <AssemblyName>OpenTTRLauncher</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -51,14 +51,14 @@
   <ItemGroup>
     <Compile Include="HTTPClient.cs" />
     <Compile Include="LocalGlobals.cs" />
-    <Compile Include="myTTRLauncher.cs" />
-    <Compile Include="myTTRLauncher.Designer.cs">
-      <DependentUpon>myTTRLauncher.cs</DependentUpon>
+    <Compile Include="OpenTTRLauncher.cs" />
+    <Compile Include="OpenTTRLauncher.Designer.cs">
+      <DependentUpon>OpenTTRLauncher.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="myTTRLauncher.resx">
-      <DependentUpon>myTTRLauncher.cs</DependentUpon>
+    <EmbeddedResource Include="OpenTTRLauncher.resx">
+      <DependentUpon>OpenTTRLauncher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
