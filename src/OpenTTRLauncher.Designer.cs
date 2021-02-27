@@ -36,8 +36,9 @@ namespace myTTRLauncher
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
-            this.authTextBox = new System.Windows.Forms.TextBox();
             this.authLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.populationLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // linkLabel
@@ -57,11 +58,12 @@ namespace myTTRLauncher
             this.titleLabel.BackColor = System.Drawing.Color.Transparent;
             this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.titleLabel.ForeColor = System.Drawing.Color.Indigo;
-            this.titleLabel.Location = new System.Drawing.Point(215, 9);
+            this.titleLabel.Location = new System.Drawing.Point(158, 9);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(316, 46);
+            this.titleLabel.Size = new System.Drawing.Size(382, 46);
             this.titleLabel.TabIndex = 3;
-            this.titleLabel.Text = "myTTRLauncher";
+            this.titleLabel.Text = "Open TTR Launcher";
+            this.titleLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // loginButton
             // 
@@ -111,35 +113,47 @@ namespace myTTRLauncher
             this.passwordLabel.TabIndex = 7;
             this.passwordLabel.Text = "Password: ";
             // 
-            // authTextBox
-            // 
-            this.authTextBox.Location = new System.Drawing.Point(321, 304);
-            this.authTextBox.Name = "authTextBox";
-            this.authTextBox.Size = new System.Drawing.Size(114, 22);
-            this.authTextBox.TabIndex = 8;
-            this.authTextBox.Visible = false;
-            // 
             // authLabel
             // 
             this.authLabel.AutoSize = true;
             this.authLabel.Location = new System.Drawing.Point(309, 284);
             this.authLabel.Name = "authLabel";
-            this.authLabel.Size = new System.Drawing.Size(137, 17);
+            this.authLabel.Size = new System.Drawing.Size(0, 17);
             this.authLabel.TabIndex = 9;
-            this.authLabel.Text = "Authentication token";
             this.authLabel.Visible = false;
             this.authLabel.Click += new System.EventHandler(this.Label1_Click_2);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 374);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(134, 17);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Current Population: ";
+            // 
+            // populationLabel
+            // 
+            this.populationLabel.AutoSize = true;
+            this.populationLabel.Location = new System.Drawing.Point(152, 374);
+            this.populationLabel.Name = "populationLabel";
+            this.populationLabel.Size = new System.Drawing.Size(74, 17);
+            this.populationLabel.TabIndex = 11;
+            this.populationLabel.Text = "population";
+            this.populationLabel.Click += new System.EventHandler(this.Label2_Click);
+            // 
             // myTTRLauncher
             // 
+            this.AcceptButton = this.loginButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(708, 404);
+            this.Controls.Add(this.populationLabel);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.authLabel);
-            this.Controls.Add(this.authTextBox);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.usernameLabel);
             this.Controls.Add(this.passwordTextBox);
@@ -148,6 +162,7 @@ namespace myTTRLauncher
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.linkLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -168,8 +183,9 @@ namespace myTTRLauncher
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.Label passwordLabel;
-        private System.Windows.Forms.TextBox authTextBox;
         private System.Windows.Forms.Label authLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label populationLabel;
     }
 }
 

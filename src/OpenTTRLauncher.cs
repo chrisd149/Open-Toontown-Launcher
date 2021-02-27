@@ -1,5 +1,7 @@
 using System;
 using System.Windows.Forms;
+using System.Threading.Tasks;
+using Globals;
 
 
 namespace myTTRLauncher
@@ -9,12 +11,27 @@ namespace myTTRLauncher
         public myTTRLauncher()
         {
             InitializeComponent();
+            currentPopulation();
         }
 
         private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/chrisd149/myTTRLauncher/tree/master/TTRLauncher");
 
+        }
+
+        private void currentPopulation()
+        {
+            // Starts timer
+            Timer myTimer = new Timer();
+            populationLabel.Text = HTTPClient.WebRequest.getPopulation() + " toons";
+
+            var timer = new Timer { Interval = LocalGlobals.GETInterval };
+            timer.Tick += (o, args) =>
+            {
+                populationLabel.Text = HTTPClient.WebRequest.getPopulation() + " toons";
+            };
+            timer.Start();
         }
 
         private void loginButton_Click(object sender, EventArgs e)
@@ -41,6 +58,11 @@ namespace myTTRLauncher
         }
 
         private void Label1_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label2_Click(object sender, EventArgs e)
         {
 
         }
