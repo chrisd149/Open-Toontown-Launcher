@@ -16,3 +16,7 @@ I can be contacted via the following methods:
 
 I will try my best to respond to legitimate questions/inquires at soon as possible, however it may take me a few days at 
 most.
+
+## Licensing
+This project uses the [MIT License](LICENSE.md).
+
