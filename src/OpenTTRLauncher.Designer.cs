@@ -1,6 +1,6 @@
-namespace myTTRLauncher
+namespace OpenTTRLauncher
 {
-    partial class myTTRLauncher
+    partial class OpenTTRLauncher
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace myTTRLauncher
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(myTTRLauncher));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OpenTTRLauncher));
             this.linkLabel = new System.Windows.Forms.LinkLabel();
             this.titleLabel = new System.Windows.Forms.Label();
             this.loginButton = new System.Windows.Forms.Button();
@@ -44,26 +44,31 @@ namespace myTTRLauncher
             // linkLabel
             // 
             this.linkLabel.AutoSize = true;
-            this.linkLabel.Location = new System.Drawing.Point(318, 374);
+            this.linkLabel.BackColor = System.Drawing.Color.LightSalmon;
+            this.linkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel.Location = new System.Drawing.Point(308, 375);
             this.linkLabel.Name = "linkLabel";
-            this.linkLabel.Size = new System.Drawing.Size(117, 17);
+            this.linkLabel.Size = new System.Drawing.Size(137, 20);
             this.linkLabel.TabIndex = 0;
             this.linkLabel.TabStop = true;
             this.linkLabel.Text = "Github repository";
+            this.linkLabel.UseWaitCursor = true;
             this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
             this.titleLabel.BackColor = System.Drawing.Color.Transparent;
-            this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
-            this.titleLabel.ForeColor = System.Drawing.Color.Indigo;
-            this.titleLabel.Location = new System.Drawing.Point(158, 9);
+            this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.titleLabel.Location = new System.Drawing.Point(165, 9);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(382, 46);
+            this.titleLabel.Size = new System.Drawing.Size(364, 44);
             this.titleLabel.TabIndex = 3;
             this.titleLabel.Text = "Open TTR Launcher";
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.titleLabel.UseWaitCursor = true;
+            this.titleLabel.Click += new System.EventHandler(this.TitleLabel_Click);
             // 
             // loginButton
             // 
@@ -81,37 +86,45 @@ namespace myTTRLauncher
             // 
             // usernameTextBox
             // 
+            this.usernameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameTextBox.Location = new System.Drawing.Point(146, 133);
             this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.Size = new System.Drawing.Size(527, 22);
+            this.usernameTextBox.Size = new System.Drawing.Size(527, 27);
             this.usernameTextBox.TabIndex = 4;
+            this.usernameTextBox.UseWaitCursor = true;
             // 
             // passwordTextBox
             // 
+            this.passwordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordTextBox.Location = new System.Drawing.Point(146, 186);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
-            this.passwordTextBox.Size = new System.Drawing.Size(527, 22);
+            this.passwordTextBox.Size = new System.Drawing.Size(527, 27);
             this.passwordTextBox.TabIndex = 5;
+            this.passwordTextBox.UseWaitCursor = true;
             // 
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
+            this.usernameLabel.BackColor = System.Drawing.Color.LightSalmon;
+            this.usernameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameLabel.Location = new System.Drawing.Point(12, 133);
             this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(81, 17);
+            this.usernameLabel.Size = new System.Drawing.Size(91, 20);
             this.usernameLabel.TabIndex = 6;
-            this.usernameLabel.Text = "Username: ";
+            this.usernameLabel.Text = "Username:";
             this.usernameLabel.Click += new System.EventHandler(this.Label1_Click);
             // 
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
+            this.passwordLabel.BackColor = System.Drawing.Color.LightSalmon;
+            this.passwordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordLabel.Location = new System.Drawing.Point(12, 186);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(77, 17);
+            this.passwordLabel.Size = new System.Drawing.Size(88, 20);
             this.passwordLabel.TabIndex = 7;
-            this.passwordLabel.Text = "Password: ";
+            this.passwordLabel.Text = "Password:";
             // 
             // authLabel
             // 
@@ -120,29 +133,38 @@ namespace myTTRLauncher
             this.authLabel.Name = "authLabel";
             this.authLabel.Size = new System.Drawing.Size(0, 17);
             this.authLabel.TabIndex = 9;
+            this.authLabel.UseWaitCursor = true;
             this.authLabel.Visible = false;
             this.authLabel.Click += new System.EventHandler(this.Label1_Click_2);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Navy;
             this.label1.Location = new System.Drawing.Point(12, 374);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 17);
+            this.label1.Size = new System.Drawing.Size(139, 18);
             this.label1.TabIndex = 10;
             this.label1.Text = "Current Population: ";
+            this.label1.UseWaitCursor = true;
             // 
             // populationLabel
             // 
             this.populationLabel.AutoSize = true;
-            this.populationLabel.Location = new System.Drawing.Point(152, 374);
+            this.populationLabel.BackColor = System.Drawing.Color.Transparent;
+            this.populationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.populationLabel.ForeColor = System.Drawing.Color.Navy;
+            this.populationLabel.Location = new System.Drawing.Point(155, 374);
             this.populationLabel.Name = "populationLabel";
-            this.populationLabel.Size = new System.Drawing.Size(74, 17);
+            this.populationLabel.Size = new System.Drawing.Size(76, 18);
             this.populationLabel.TabIndex = 11;
             this.populationLabel.Text = "population";
+            this.populationLabel.UseWaitCursor = true;
             this.populationLabel.Click += new System.EventHandler(this.Label2_Click);
             // 
-            // myTTRLauncher
+            // OpenTTRLauncher
             // 
             this.AcceptButton = this.loginButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -161,13 +183,15 @@ namespace myTTRLauncher
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.linkLabel);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "myTTRLauncher";
-            this.Text = "myTTRLauncher";
+            this.Name = "OpenTTRLauncher";
+            this.Text = "Open TTR Launcher";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

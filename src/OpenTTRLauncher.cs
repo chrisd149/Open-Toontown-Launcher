@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using Globals;
 
 
-namespace myTTRLauncher
+namespace OpenTTRLauncher
 {
-    public partial class myTTRLauncher : Form
+    public partial class OpenTTRLauncher : Form
     {
-        public myTTRLauncher()
+        public OpenTTRLauncher()
         {
             InitializeComponent();
             currentPopulation();
@@ -16,7 +16,7 @@ namespace myTTRLauncher
 
         private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/chrisd149/myTTRLauncher/tree/master/TTRLauncher");
+            System.Diagnostics.Process.Start("https://github.com/chrisd149/OpenTTRLauncher/tree/master/TTRLauncher");
 
         }
 
@@ -63,6 +63,11 @@ namespace myTTRLauncher
         }
 
         private void Label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TitleLabel_Click(object sender, EventArgs e)
         {
 
         }

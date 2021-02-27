@@ -51,7 +51,9 @@
   <ItemGroup>
     <Compile Include="HTTPClient.cs" />
     <Compile Include="LocalGlobals.cs" />
-    <Compile Include="OpenTTRLauncher.cs" />
+    <Compile Include="OpenTTRLauncher.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="OpenTTRLauncher.Designer.cs">
       <DependentUpon>OpenTTRLauncher.cs</DependentUpon>
     </Compile>

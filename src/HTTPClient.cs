@@ -8,7 +8,7 @@ using System.Diagnostics;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
 using Globals;
-using myTTRLauncher;
+using OpenTTRLauncher;
 
 
 namespace HTTPClient
