@@ -1,4 +1,4 @@
-# Open TTR Launcher
+# Open Toontown Launcher
 A .NET GUI launcher for Toontown Rewritten.
 
 ## Installing
@@ -9,7 +9,7 @@ After downloading the repository, build the project in Visual Studio with the ho
 ## Running the project
 The launcher operates very simularlly to Toontown Rewritten's offical launcher.  2 entry fields for username and password are present, with the ability to login using either the login button or pressing the Enter key.  The launcher also has a live counter of the population of Toontown.
 
-![image](https://user-images.githubusercontent.com/48182689/109400980-e8189300-7919-11eb-9e29-84b6935cdfad.png "The launcher")
+![image](https://user-images.githubusercontent.com/48182689/124153765-c6175480-da62-11eb-9a9b-3214fe56a5e5.png "The launcher")
 
 *The current launcher GUI*
 
