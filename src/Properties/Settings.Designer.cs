@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OpenTTRLauncher.Properties
+namespace OpenTTLauncher.Properties
 {
 
 

@@ -8,7 +8,9 @@ using System.Diagnostics;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
 using Globals;
-using OpenTTRLauncher;
+using OpenTTLauncher;
+using System.Linq;
+using System.Collections.Generic;
 
 
 namespace HTTPClient
@@ -21,12 +23,12 @@ namespace HTTPClient
             LocalGlobals.usr = usr;
             LocalGlobals.pws = pws;
 
-            string url = "https://www.toontownrewritten.com/api/login?format=json";
 
             // Checks for username and password
             if (string.IsNullOrEmpty(usr) || string.IsNullOrEmpty(pws))
             {
                 MessageBox.Show("No username or password entered!", "Incorrect Login Information");
+                return;
             }
             else
             {
@@ -35,20 +37,23 @@ namespace HTTPClient
                     var data = new NameValueCollection();
 
                     // Enters login queue
+                    LocalGlobals.url = "https://www.toontownrewritten.com/api/login?format=json";
+                    wb.Headers.Set("Content-type", "application/x-www-form-urlencoded");
+
                     if (responseStatus == "delayed")
                     {
                         data["queueToken"] = LocalGlobals.queueToken;
                     }
 
                     // Incorrect login details
-                    if (responseStatus == "false")
+                    else if (responseStatus == "false")
                     {
-                        MessageBox.Show(LocalGlobals.banner, "Incorrect Login Information");
+                        MessageBox.Show(LocalGlobals.banner, "Yipes!");
                         return;
                     }
 
                     // Allows user to enter 2FA token to login
-                    if (responseStatus == "partial")
+                    else if (responseStatus == "partial")
                     {
                         data["appToken"] = Interaction.InputBox("Input an auth token here", "Authorization Token", "");
                         data["authToken"] = LocalGlobals.responseToken;
@@ -61,30 +66,29 @@ namespace HTTPClient
                     }
 
                     // Logins
-                    else
+                    else if (responseStatus == "none")
                     {
                         data["username"] = usr;
                         data["password"] = pws;
                     }
-
-                    wb.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-
                     // Sends POST response
-                    var response = wb.UploadValues(url, "POST", data);
+
+                    var response = wb.UploadValues(LocalGlobals.url, "POST", data);
                     string responseInString = System.Text.Encoding.UTF8.GetString(response);
- 
-                    Console.WriteLine(responseInString);
+
+                    Console.WriteLine(response);
                     HTTPStatus(responseInString);
                 }
             }
         }
+    
         public static string getPopulation()
         {
             string population_url = "https://www.toontownrewritten.com/api/population";
             using (var client = new WebClient())
             {
                 client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-                client.Headers.Add("User-Agent", "Project: Open TTR Launcher, Author: Christian Diaz, Email: christianmigueldiaz@gmail.com");
+                client.Headers.Add("User-Agent", "Project: Open TT Launcher, Author: Christian Diaz, Email: christianmigueldiaz@gmail.com");
                 var raw_data = client.DownloadString(population_url);
                 dynamic data = JObject.Parse(raw_data);
                 string population = data.totalPopulation;
@@ -98,52 +102,58 @@ namespace HTTPClient
         {
             // JObject is used to get values from the response
             dynamic json = JObject.Parse(response);
-            if (json.success == "false")
+            switch (LocalGlobals.game)
             {
-                LocalGlobals.banner = json.banner;
-                Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
+                case "TTR":
+                if (json.success == "false")
+                {
+                    LocalGlobals.banner = json.banner;
+                    Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
+                }
+                if (json.success == "delayed")
+                {
+                    // Adds 1 second to delay
+                    LocalGlobals.timeToWait += 1000;
+                    Task.Delay(LocalGlobals.timeToWait).Wait();
+
+                    // Sends another POST request with the queueToken only
+                    LocalGlobals.queueToken = json.queueToken;
+                    Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
+                }
+                if (json.success == "partial")
+                {
+                    // Adds 1 second to delay
+                    LocalGlobals.timeToWait += 1000;
+                    Task.Delay(LocalGlobals.timeToWait).Wait();
+
+                    // Sends another POST request with the authToken and responseToken only
+                    LocalGlobals.responseToken = json.responseToken;
+                    Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
+                }
+                if (json.success == "true")
+                {
+
+                    LocalGlobals.timeToWait = 0;
+                    LocalGlobals.GETInterval = 150000;
+
+                    // Logins to game using credientials
+                    Console.WriteLine("SUCCESS: Logging you in to the Tooniverse...");
+                    Environment.SetEnvironmentVariable("TTR_GAMESERVER", Convert.ToString(json.gameserver));
+                    Environment.SetEnvironmentVariable("TTR_PLAYCOOKIE", Convert.ToString(json.cookie));
+
+                    Directory.SetCurrentDirectory(@"C:\Program Files (x86)\Toontown Rewritten");
+
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+
+                    startInfo.FileName = "TTREngine.exe";
+                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+
+                    // Starts game
+                    Process.Start(startInfo);
+                }
+                break;
             }
-            if (json.success == "delayed")
-            {
-                // Adds 1 second to delay
-                LocalGlobals.timeToWait += 1000;
-                Task.Delay(LocalGlobals.timeToWait).Wait();
-
-                // Sends another POST request with the queueToken only
-                LocalGlobals.queueToken = json.queueToken;
-                Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
-            }
-            if (json.success == "partial")
-            {
-                // Adds 1 second to delay
-                LocalGlobals.timeToWait += 1000;
-                Task.Delay(LocalGlobals.timeToWait).Wait();
-
-                // Sends another POST request with the authToken and responseToken only
-                LocalGlobals.responseToken = json.responseToken;
-                Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
-            }
-            if (json.success == "true")
-            {
-
-                LocalGlobals.timeToWait = 0;
-                LocalGlobals.GETInterval = 150000;
-
-                // Logins to game using credientials
-                Console.WriteLine("SUCCESS: Logging you in to the Tooniverse...");
-                Environment.SetEnvironmentVariable("TTR_GAMESERVER", Convert.ToString(json.gameserver));
-                Environment.SetEnvironmentVariable("TTR_PLAYCOOKIE", Convert.ToString(json.cookie));
-                    
-                Directory.SetCurrentDirectory(@"C:\Program Files (x86)\Toontown Rewritten");
-
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-
-                startInfo.FileName = "TTREngine.exe";
-                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-
-                // Starts game
-                Process.Start(startInfo);
-            }
+            
         }
     }
 }

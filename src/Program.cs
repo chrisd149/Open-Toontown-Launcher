@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace OpenTTRLauncher
+namespace OpenTTLauncher
 {
     static class Program
     {
@@ -13,7 +13,7 @@ namespace OpenTTRLauncher
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new OpenTTRLauncher());
+            Application.Run(new OpenTTLauncher());
         }
     }
 }
