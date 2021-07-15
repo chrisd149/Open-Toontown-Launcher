@@ -172,6 +172,20 @@ namespace HTTPClient
                 return null;
             }
         }
+
+        public static void removeUser(string usr)
+        {
+            if (File.Exists(@".\quicklogin.json"))
+            {
+                string json = File.ReadAllText(@".\quicklogin.json");
+                Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+                json_Dictionary.Remove(usr);
+
+                json = JsonConvert.SerializeObject(json_Dictionary);
+                System.IO.File.WriteAllText(@".\quicklogin.json", json);
+                MessageBox.Show($"Removed {usr} from QuickLogin!", "Account Removed");
+            }
+        }
         public static void HTTPStatus(string response)
         {
             // JObject is used to get values from the response

@@ -46,6 +46,7 @@ namespace OpenTTLauncher
             this.button2 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // linkLabel
@@ -212,16 +213,16 @@ namespace OpenTTLauncher
             this.button1.Font = new System.Drawing.Font("Impress BT", 10F);
             this.button1.Location = new System.Drawing.Point(140, 231);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(204, 30);
+            this.button1.Size = new System.Drawing.Size(104, 30);
             this.button1.TabIndex = 19;
-            this.button1.Text = "Save Account for QuickLogin";
+            this.button1.Text = "Save Account";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Impress BT", 10F);
-            this.button2.Location = new System.Drawing.Point(362, 231);
+            this.button2.Location = new System.Drawing.Point(376, 231);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(96, 30);
             this.button2.TabIndex = 20;
@@ -233,7 +234,7 @@ namespace OpenTTLauncher
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(478, 249);
+            this.comboBox1.Location = new System.Drawing.Point(478, 244);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 21;
@@ -244,12 +245,23 @@ namespace OpenTTLauncher
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.WhiteSmoke;
             this.label6.Font = new System.Drawing.Font("Impress BT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(484, 229);
+            this.label6.Location = new System.Drawing.Point(484, 223);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(107, 16);
             this.label6.TabIndex = 22;
             this.label6.Text = "Select An Account";
             this.label6.Click += new System.EventHandler(this.Label6_Click);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Impress BT", 10F);
+            this.button3.Location = new System.Drawing.Point(251, 231);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(118, 30);
+            this.button3.TabIndex = 23;
+            this.button3.Text = "Remove Account";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // OpenTTLauncher
             // 
@@ -260,6 +272,7 @@ namespace OpenTTLauncher
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(742, 414);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button2);
@@ -310,6 +323,7 @@ namespace OpenTTLauncher
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button3;
     }
 }
 

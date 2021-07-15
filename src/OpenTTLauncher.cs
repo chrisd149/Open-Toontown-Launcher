@@ -115,5 +115,12 @@ namespace OpenTTLauncher
         {
             comboBox1.DataSource = HTTPClient.WebRequest.returnAccounts();
         }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            String usr = comboBox1.Text;
+            HTTPClient.WebRequest.removeUser(usr);
+            refreshList();
+        }
     }
 }
