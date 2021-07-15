@@ -15,9 +15,9 @@ msbuild /p:Configuration=Release ALL_BUILD.vcxproj
 ## Running the project
 The executable for the program will be located in `build/src/Release`.  Simply run the file and the program will start! (You can also copy the file to a more convenient location or create a shortcut.)
 
-The launcher operates very similarly to Toontown Rewritten's official launcher.  2 entry fields for username and password are present, with the ability to login using either the login button or pressing the Enter key.  The launcher also has a live counter of the population of Toontown.  The launcher can also handle 2FA and ToonGuard requests to login.
+The launcher implements several new features on top of the UI change from the official launcher.  You can now setup a QuickLogin account, which allows you to easily store an account for the launcher to use, which can then launch the game without requiring user credentials to be entered.  Accounts are stored even after the program is shut down, so you can easily and quickly login on added accounts.  The launcher also features a live counter of the population of Toontown.
 
-![image](https://user-images.githubusercontent.com/48182689/124153765-c6175480-da62-11eb-9a9b-3214fe56a5e5.png "The launcher")
+![image](https://user-images.githubusercontent.com/48182689/125847091-28632c08-a35a-4747-8601-1380082dae70.png)
 
 *The launcher GUI*
 
