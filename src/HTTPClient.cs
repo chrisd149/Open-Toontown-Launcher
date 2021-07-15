@@ -7,10 +7,10 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using Globals;
-using OpenTTLauncher;
-using System.Linq;
 using System.Collections.Generic;
+using System.Web.Script.Serialization;
 
 
 namespace HTTPClient
@@ -97,6 +97,93 @@ namespace HTTPClient
 
                 // Updates population counter
                 return population;
+            }
+        }
+
+        public static void createQuickAccount(string usr, string pws)
+        {
+            if (string.IsNullOrEmpty(usr) || string.IsNullOrEmpty(pws))
+            {
+                MessageBox.Show("No username or password entered!", "Incorrect Login Information");
+                return;
+            }
+
+            string json;
+            if (File.Exists(@".\quicklogin.json")){
+                string jsonFile = File.ReadAllText(@".\quicklogin.json");
+                Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(jsonFile);
+                foreach (var item in json_Dictionary.Keys)
+                {
+                    if (usr == Convert.ToString(item))
+                    {
+                        MessageBox.Show($"User {usr} is already a QuickLogin user!", "Account Already Added");
+                        return;
+                    }
+                }
+                json_Dictionary.Add(usr, pws);
+                json = JsonConvert.SerializeObject(json_Dictionary);
+            }
+            else
+            {
+                var columns = new Dictionary<string, string>
+                {
+                    {usr, pws},
+                };
+                json = JsonConvert.SerializeObject(columns);
+            }
+            
+            //write string to file
+            System.IO.File.WriteAllText(@".\quicklogin.json", json);
+            MessageBox.Show($"Added {usr} to QuickLogin!", "Account Added");
+        }
+        public static void quickLogin(string usr)
+        {
+            if (File.Exists(@".\quicklogin.json"))
+            {
+                string json = File.ReadAllText(@".\quicklogin.json");
+                Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+                foreach (var item in json_Dictionary.Keys)
+                {
+                    if (usr == Convert.ToString(item))
+                    {
+                        var pws = json_Dictionary[usr];
+                        Main(Convert.ToString(usr), Convert.ToString(pws));
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show($"User {usr} has not been added to QuickLogin yet.", "Account Not Added");
+                return;
+            }
+        }
+        public static List<string> returnAccounts()
+        {
+            if (File.Exists(@".\quicklogin.json"))
+            {
+                string json = File.ReadAllText(@".\quicklogin.json");
+                Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+                List<string> accounts = new List<string>(json_Dictionary.Keys);
+                return accounts;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static void removeUser(string usr)
+        {
+            if (File.Exists(@".\quicklogin.json"))
+            {
+                string json = File.ReadAllText(@".\quicklogin.json");
+                Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+                json_Dictionary.Remove(usr);
+
+                json = JsonConvert.SerializeObject(json_Dictionary);
+                System.IO.File.WriteAllText(@".\quicklogin.json", json);
+                MessageBox.Show($"Removed {usr} from QuickLogin!", "Account Removed");
             }
         }
         public static void HTTPStatus(string response)
