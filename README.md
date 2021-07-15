@@ -2,7 +2,7 @@
 A .NET GUI launcher for Toontown Rewritten.
 
 ## Installing
-You must have a recent version of Visual Studio 19 installed in order to build the project solution, as well as MSBuild installed.
+You must have a recent version of Visual Studio 19 installed in order to build the project solution, as well as MSBuild installed.  You must also have CMake installed to build the project from the command line.
 
 Example steps to build the project with Visual Studio 2019 and MSBuild:
 ```
