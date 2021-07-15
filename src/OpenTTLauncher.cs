@@ -47,8 +47,11 @@ namespace OpenTTLauncher
                 "registered with Toontown Rewritten, which you can do at toontownrewritten.com.  You must also have Toontown Rewritten" +
                 "installed on your system, with it already updated (i.e. the offical launcher has been launched at least once.) " +
                 Environment.NewLine + Environment.NewLine +
-                "Enter your username and password in the fields on the launcher, and click the play button. The game should begin logging in if " +
-                "your credentials are correct.  You may also be asked to enter a token if you have ToonGuard or Two-factor authorization enabled. " +
+                "QuickLogin:" + Environment.NewLine +
+                "After entering your username and password, you can setup a QuickLogin account by clicking the 'Save Account' button. " +
+                "After doing so, you can select an account to login with on the dropdown box, and click the 'QuickLogin' button to login with that account. " +
+                "The account is stored locally in the project directory, and can be deleted by selecting your account in the dropdown, and clicking the " +
+                "'Remove Account' button." + 
                 Environment.NewLine + Environment.NewLine +
                 "Contact me if you have any issues or questions at christianmigueldiaz@gmail.com or on discord at chrisd149#7640";
             string title = "Instructions";
