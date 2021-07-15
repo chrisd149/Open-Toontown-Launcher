@@ -87,5 +87,17 @@ namespace OpenTTLauncher
         {
 
         }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            string username = usernameTextBox.Text;
+            string password = passwordTextBox.Text;
+            HTTPClient.WebRequest.createQuickAccount(username, password);
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            HTTPClient.WebRequest.quickLogin();
+        }
     }
 }

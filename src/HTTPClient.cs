@@ -7,10 +7,10 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using Globals;
-using OpenTTLauncher;
-using System.Linq;
 using System.Collections.Generic;
+using System.Web.Script.Serialization;
 
 
 namespace HTTPClient
@@ -97,6 +97,42 @@ namespace HTTPClient
 
                 // Updates population counter
                 return population;
+            }
+        }
+
+        public static void createQuickAccount(string usr, string pws)
+        {
+            if (string.IsNullOrEmpty(usr) || string.IsNullOrEmpty(pws))
+            {
+                MessageBox.Show("No username or password entered!", "Incorrect Login Information");
+                return;
+            }
+            var columns = new Dictionary<string, string>
+            {
+                { "username", usr},
+                { "password", pws}
+            };
+
+            var json = JsonConvert.SerializeObject(columns);
+
+            //write string to file
+            System.IO.File.WriteAllText(@".\quicklogin.json", json);
+            MessageBox.Show($"Added {usr} to QuickLogin!", "Account Added");
+        }
+        public static void quickLogin()
+        {
+            string json = File.ReadAllText(@".\quicklogin.json");
+            Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+
+            try
+            {
+                var username = json_Dictionary["username"];
+                var password = json_Dictionary["password"];
+                Main(Convert.ToString(username), Convert.ToString(password));
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error!");
             }
         }
         public static void HTTPStatus(string response)
