@@ -66,8 +66,6 @@ namespace HTTPClient
 
                     }
                     // Sends POST response
-                    // TEMP Ill remove this in the next commit lol
-                    LocalGlobals.game = "TTR";
                     try
                     {
                         var response = wb.UploadValues(LocalGlobals.url, "POST", data);
@@ -84,6 +82,7 @@ namespace HTTPClient
         }
     
         public static string getPopulation()
+        // Returns current population of Toontown to live counter on launcher
         {
             string population_url = "https://www.toontownrewritten.com/api/population";
             using (var client = new WebClient())
@@ -101,7 +100,9 @@ namespace HTTPClient
         }
 
         public static void createQuickAccount(string usr, string pws)
+        // Adds new QuickLogin account
         {
+            // No username and/or password entered
             if (string.IsNullOrEmpty(usr) || string.IsNullOrEmpty(pws))
             {
                 MessageBox.Show("No username or password entered!", "Incorrect Login Information");
@@ -109,6 +110,7 @@ namespace HTTPClient
             }
 
             string json;
+            // If the json already exists, we have to get the data from it, convert it to a dictionary, modify the dictionary, and then create the json.
             if (File.Exists(@".\quicklogin.json")){
                 string jsonFile = File.ReadAllText(@".\quicklogin.json");
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(jsonFile);
@@ -116,6 +118,7 @@ namespace HTTPClient
                 {
                     if (usr == Convert.ToString(item))
                     {
+                        // User is already in json file.
                         MessageBox.Show($"User {usr} is already a QuickLogin user!", "Account Already Added");
                         return;
                     }
@@ -132,11 +135,13 @@ namespace HTTPClient
                 json = JsonConvert.SerializeObject(columns);
             }
             
-            //write string to file
+            // Write json string to file
             System.IO.File.WriteAllText(@".\quicklogin.json", json);
             MessageBox.Show($"Added {usr} to QuickLogin!", "Account Added");
         }
         public static void quickLogin(string usr)
+        // QuickLogin function
+        // Logins with the currently selected account.
         {
             if (File.Exists(@".\quicklogin.json"))
             {
@@ -146,6 +151,7 @@ namespace HTTPClient
                 {
                     if (usr == Convert.ToString(item))
                     {
+                        // Found the account, get it's password and login.
                         var pws = json_Dictionary[usr];
                         Main(Convert.ToString(usr), Convert.ToString(pws));
                         return;
@@ -154,16 +160,19 @@ namespace HTTPClient
             }
             else
             {
+                // Account not in json
                 MessageBox.Show($"User {usr} has not been added to QuickLogin yet.", "Account Not Added");
                 return;
             }
         }
         public static List<string> returnAccounts()
+        // Returns list of accounts in json.  Used to update dropdownlist of accounts.
         {
             if (File.Exists(@".\quicklogin.json"))
             {
                 string json = File.ReadAllText(@".\quicklogin.json");
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+                // Convert keys (account usernames) to list.
                 List<string> accounts = new List<string>(json_Dictionary.Keys);
                 return accounts;
             }
@@ -174,13 +183,14 @@ namespace HTTPClient
         }
 
         public static void removeUser(string usr)
+        // Removes selected account from json.
         {
             if (File.Exists(@".\quicklogin.json"))
             {
+                // Simular to adding a user, we must convert the file to dict and then back to json.
                 string json = File.ReadAllText(@".\quicklogin.json");
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
                 json_Dictionary.Remove(usr);
-
                 json = JsonConvert.SerializeObject(json_Dictionary);
                 System.IO.File.WriteAllText(@".\quicklogin.json", json);
                 MessageBox.Show($"Removed {usr} from QuickLogin!", "Account Removed");

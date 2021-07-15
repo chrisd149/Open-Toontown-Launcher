@@ -8,7 +8,6 @@ namespace Globals
         public static string queueToken;
         public static string responseToken;
         public static string banner;
-        public static string game;
         public static string url;
         public static int timeToWait;
         public static int GETInterval = 60000;
