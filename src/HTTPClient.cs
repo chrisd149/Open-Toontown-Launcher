@@ -72,7 +72,8 @@ namespace HTTPClient
                         data["password"] = pws;
                     }
                     // Sends POST response
-
+                    // TEMP Ill remove this in the next commit lol
+                    LocalGlobals.game = "TTR";
                     var response = wb.UploadValues(LocalGlobals.url, "POST", data);
                     string responseInString = System.Text.Encoding.UTF8.GetString(response);
 
