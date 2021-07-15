@@ -107,32 +107,69 @@ namespace HTTPClient
                 MessageBox.Show("No username or password entered!", "Incorrect Login Information");
                 return;
             }
-            var columns = new Dictionary<string, string>
+
+            string json;
+            if (File.Exists(@".\quicklogin.json")){
+                string jsonFile = File.ReadAllText(@".\quicklogin.json");
+                Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(jsonFile);
+                foreach (var item in json_Dictionary.Keys)
+                {
+                    if (usr == Convert.ToString(item))
+                    {
+                        MessageBox.Show($"User {usr} is already a QuickLogin user!", "Account Already Added");
+                        return;
+                    }
+                }
+                json_Dictionary.Add(usr, pws);
+                json = JsonConvert.SerializeObject(json_Dictionary);
+            }
+            else
             {
-                { "username", usr},
-                { "password", pws}
-            };
-
-            var json = JsonConvert.SerializeObject(columns);
-
+                var columns = new Dictionary<string, string>
+                {
+                    {usr, pws},
+                };
+                json = JsonConvert.SerializeObject(columns);
+            }
+            
             //write string to file
             System.IO.File.WriteAllText(@".\quicklogin.json", json);
             MessageBox.Show($"Added {usr} to QuickLogin!", "Account Added");
         }
-        public static void quickLogin()
+        public static void quickLogin(string usr)
         {
-            string json = File.ReadAllText(@".\quicklogin.json");
-            Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
-
-            try
+            if (File.Exists(@".\quicklogin.json"))
             {
-                var username = json_Dictionary["username"];
-                var password = json_Dictionary["password"];
-                Main(Convert.ToString(username), Convert.ToString(password));
+                string json = File.ReadAllText(@".\quicklogin.json");
+                Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+                foreach (var item in json_Dictionary.Keys)
+                {
+                    if (usr == Convert.ToString(item))
+                    {
+                        var pws = json_Dictionary[usr];
+                        Main(Convert.ToString(usr), Convert.ToString(pws));
+                        return;
+                    }
+                }
             }
-            catch (Exception error)
+            else
             {
-                MessageBox.Show(error.Message, "Error!");
+                MessageBox.Show($"User {usr} has not been added to QuickLogin yet.", "Account Not Added");
+                return;
+            }
+        }
+        public static List<string> returnAccounts()
+        {
+            if (File.Exists(@".\quicklogin.json"))
+            {
+                string json = File.ReadAllText(@".\quicklogin.json");
+                Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+                List<string> accounts = new List<string>(json_Dictionary.Keys);
+                return accounts;
+            }
+            else
+            {
+                return null;
             }
         }
         public static void HTTPStatus(string response)

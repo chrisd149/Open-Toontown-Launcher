@@ -11,6 +11,7 @@ namespace OpenTTLauncher
         {
             InitializeComponent();
             currentPopulation();
+            refreshList();
         }
 
         private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -93,11 +94,26 @@ namespace OpenTTLauncher
             string username = usernameTextBox.Text;
             string password = passwordTextBox.Text;
             HTTPClient.WebRequest.createQuickAccount(username, password);
+            refreshList();
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            HTTPClient.WebRequest.quickLogin();
+            String usr = comboBox1.Text;
+            HTTPClient.WebRequest.quickLogin(usr);
+        }
+
+        private void Label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+        public void refreshList()
+        {
+            comboBox1.DataSource = HTTPClient.WebRequest.returnAccounts();
         }
     }
 }
