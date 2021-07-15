@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9DAD803B-FE01-490C-8C34-66A92AC624DC}</ProjectGuid>
+    <ProjectGuid>{B87C3990-44B9-364B-8C12-8AAF2BF255D9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>OpenTTLauncher</RootNamespace>
     <AssemblyName>OpenTTLauncher</AssemblyName>

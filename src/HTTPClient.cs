@@ -39,46 +39,46 @@ namespace HTTPClient
                     // Enters login queue
                     LocalGlobals.url = "https://www.toontownrewritten.com/api/login?format=json";
                     wb.Headers.Set("Content-type", "application/x-www-form-urlencoded");
-
-                    if (responseStatus == "delayed")
+                    switch (responseStatus)
                     {
-                        data["queueToken"] = LocalGlobals.queueToken;
-                    }
-
-                    // Incorrect login details
-                    else if (responseStatus == "false")
-                    {
-                        MessageBox.Show(LocalGlobals.banner, "Yipes!");
-                        return;
-                    }
-
-                    // Allows user to enter 2FA token to login
-                    else if (responseStatus == "partial")
-                    {
-                        data["appToken"] = Interaction.InputBox("Input an auth token here", "Authorization Token", "");
-                        data["authToken"] = LocalGlobals.responseToken;
-
-                        // Exit login sequence if auth pop up is closed
-                        if (string.IsNullOrWhiteSpace(data["appToken"]))
-                        {
+                        case "delayed":
+                            data["queueToken"] = LocalGlobals.queueToken;
+                            break;
+                        // Incorrect login details
+                        case "false":
+                            MessageBox.Show(LocalGlobals.banner, "Yipes!");
                             return;
-                        }
-                    }
+                        // Allows user to enter 2FA or ToonGuard token to login
+                        case "partial":
+                            data["appToken"] = Interaction.InputBox(LocalGlobals.banner, "Authorization Token Needed", "");
+                            data["authToken"] = LocalGlobals.responseToken;
 
-                    // Logins
-                    else if (responseStatus == "none")
-                    {
-                        data["username"] = usr;
-                        data["password"] = pws;
+                            // Exit login sequence if auth pop up is closed
+                            if (string.IsNullOrWhiteSpace(data["appToken"]))
+                            {
+                                return;
+                            }
+                            break;
+                        case "none":
+                            data["username"] = usr;
+                            data["password"] = pws;
+                            break;
+
                     }
                     // Sends POST response
                     // TEMP Ill remove this in the next commit lol
                     LocalGlobals.game = "TTR";
-                    var response = wb.UploadValues(LocalGlobals.url, "POST", data);
-                    string responseInString = System.Text.Encoding.UTF8.GetString(response);
-
-                    Console.WriteLine(response);
-                    HTTPStatus(responseInString);
+                    try
+                    {
+                        var response = wb.UploadValues(LocalGlobals.url, "POST", data);
+                        string responseInString = System.Text.Encoding.UTF8.GetString(response);
+                        Console.WriteLine(response);
+                        HTTPStatus(responseInString);
+                    }
+                    catch (Exception error)
+                    {
+                        MessageBox.Show(error.Message, "Error!");
+                    }
                 }
             }
         }
@@ -89,7 +89,7 @@ namespace HTTPClient
             using (var client = new WebClient())
             {
                 client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-                client.Headers.Add("User-Agent", "Project: Open TT Launcher, Author: Christian Diaz, Email: christianmigueldiaz@gmail.com");
+                client.Headers.Add("User-Agent", "Project: Open Toontown Launcher, Author: Christian Diaz, Email: christianmigueldiaz@gmail.com");
                 var raw_data = client.DownloadString(population_url);
                 dynamic data = JObject.Parse(raw_data);
                 string population = data.totalPopulation;
@@ -103,16 +103,13 @@ namespace HTTPClient
         {
             // JObject is used to get values from the response
             dynamic json = JObject.Parse(response);
-            switch (LocalGlobals.game)
+            switch (Convert.ToString(json.success))
             {
-                case "TTR":
-                if (json.success == "false")
-                {
+                case "false":
                     LocalGlobals.banner = json.banner;
                     Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
-                }
-                if (json.success == "delayed")
-                {
+                    break;
+                case "delayed":
                     // Adds 1 second to delay
                     LocalGlobals.timeToWait += 1000;
                     Task.Delay(LocalGlobals.timeToWait).Wait();
@@ -120,9 +117,9 @@ namespace HTTPClient
                     // Sends another POST request with the queueToken only
                     LocalGlobals.queueToken = json.queueToken;
                     Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
-                }
-                if (json.success == "partial")
-                {
+                    break;
+                case "partial":
+                    LocalGlobals.banner = json.banner;
                     // Adds 1 second to delay
                     LocalGlobals.timeToWait += 1000;
                     Task.Delay(LocalGlobals.timeToWait).Wait();
@@ -130,15 +127,14 @@ namespace HTTPClient
                     // Sends another POST request with the authToken and responseToken only
                     LocalGlobals.responseToken = json.responseToken;
                     Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
-                }
-                if (json.success == "true")
-                {
-
+                    break;
+                case "true":
                     LocalGlobals.timeToWait = 0;
                     LocalGlobals.GETInterval = 150000;
 
                     // Logins to game using credientials
                     Console.WriteLine("SUCCESS: Logging you in to the Tooniverse...");
+                    MessageBox.Show("Logging you in to the Tooniverse...", "Successful Login");
                     Environment.SetEnvironmentVariable("TTR_GAMESERVER", Convert.ToString(json.gameserver));
                     Environment.SetEnvironmentVariable("TTR_PLAYCOOKIE", Convert.ToString(json.cookie));
 
@@ -151,8 +147,7 @@ namespace HTTPClient
 
                     // Starts game
                     Process.Start(startInfo);
-                }
-                break;
+                    break;
             }
             
         }

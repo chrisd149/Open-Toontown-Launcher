@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTTLauncher", "src\OpenTTLauncher.csproj", "{9DAD803B-FE01-490C-8C34-66A92AC624DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTTLauncher", "src\OpenTTLauncher.csproj", "{B87C3990-44B9-364B-8C12-8AAF2BF255D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9DAD803B-FE01-490C-8C34-66A92AC624DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DAD803B-FE01-490C-8C34-66A92AC624DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DAD803B-FE01-490C-8C34-66A92AC624DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DAD803B-FE01-490C-8C34-66A92AC624DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B87C3990-44B9-364B-8C12-8AAF2BF255D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B87C3990-44B9-364B-8C12-8AAF2BF255D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B87C3990-44B9-364B-8C12-8AAF2BF255D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B87C3990-44B9-364B-8C12-8AAF2BF255D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

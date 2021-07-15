@@ -1,6 +1,5 @@
 using System;
 using System.Windows.Forms;
-using System.Threading.Tasks;
 using Globals;
 
 
@@ -43,7 +42,7 @@ namespace OpenTTLauncher
 
         private void instructionsButton_Click(object sender, EventArgs e)
         {
-            string message = "This launcher uses your login credentials to login to Toontown Rewritten.  You must have an account" +
+            string message = "This launcher uses your login credentials to login to Toontown Rewritten.  You must have an account " +
                 "registered with Toontown Rewritten, which you can do at toontownrewritten.com.  You must also have Toontown Rewritten" +
                 "installed on your system, with it already updated (i.e. the offical launcher has been launched at least once.) " +
                 Environment.NewLine + Environment.NewLine +
