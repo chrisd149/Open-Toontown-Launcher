@@ -21,7 +21,7 @@ namespace HTTPClient
         {
             //Set username and password as globals
             LocalGlobals.usr = usr;
-            LocalGlobals.pws = pws;
+            LocalGlobals.pws = EncodePasswordToBase64(pws);
 
 
             // Checks for username and password
@@ -61,7 +61,7 @@ namespace HTTPClient
                             break;
                         case "none":
                             data["username"] = usr;
-                            data["password"] = pws;
+                            data["password"] = DecodeFrom64(LocalGlobals.pws);
                             break;
 
                     }
@@ -123,14 +123,14 @@ namespace HTTPClient
                         return;
                     }
                 }
-                json_Dictionary.Add(usr, pws);
+                json_Dictionary.Add(usr, EncodePasswordToBase64(pws));
                 json = JsonConvert.SerializeObject(json_Dictionary);
             }
             else
             {
                 var columns = new Dictionary<string, string>
                 {
-                    {usr, pws},
+                    {usr, EncodePasswordToBase64(pws)},
                 };
                 json = JsonConvert.SerializeObject(columns);
             }
@@ -139,6 +139,34 @@ namespace HTTPClient
             System.IO.File.WriteAllText(@".\quicklogin.json", json);
             MessageBox.Show($"Added {usr} to QuickLogin!", "Account Added");
         }
+
+        public static string EncodePasswordToBase64(string password)
+        {
+            try
+            {
+                byte[] encData_byte = new byte[password.Length];
+                encData_byte = System.Text.Encoding.UTF8.GetBytes(password);
+                string encodedData = Convert.ToBase64String(encData_byte);
+                return encodedData;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error in base64Encode" + ex.Message);
+            }
+        }
+        //this function Convert to Decord your Password
+        public static string DecodeFrom64(string encodedPassword)
+        {
+            System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
+            System.Text.Decoder utf8Decode = encoder.GetDecoder();
+            byte[] todecode_byte = Convert.FromBase64String(encodedPassword);
+            int charCount = utf8Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
+            char[] decoded_char = new char[charCount];
+            utf8Decode.GetChars(todecode_byte, 0, todecode_byte.Length, decoded_char, 0);
+            string result = new String(decoded_char);
+            return result;
+        }
+
         public static void quickLogin(string usr)
         // QuickLogin function
         // Logins with the currently selected account.
@@ -152,8 +180,9 @@ namespace HTTPClient
                     if (usr == Convert.ToString(item))
                     {
                         // Found the account, get it's password and login.
-                        var pws = json_Dictionary[usr];
-                        Main(Convert.ToString(usr), Convert.ToString(pws));
+                        object pws = json_Dictionary[usr];
+                        string decoded_pws = DecodeFrom64(Convert.ToString(pws));
+                        Main(Convert.ToString(usr), decoded_pws);
                         return;
                     }
                 }
