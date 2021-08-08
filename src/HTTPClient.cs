@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Web.Script.Serialization;
 
 
-namespace HTTPClient
+namespace OpenTTLauncher
 {
     public static class WebRequest
     {
@@ -37,7 +37,6 @@ namespace HTTPClient
                     var data = new NameValueCollection();
 
                     // Enters login queue
-                    LocalGlobals.url = "https://www.toontownrewritten.com/api/login?format=json";
                     wb.Headers.Set("Content-type", "application/x-www-form-urlencoded");
                     switch (responseStatus)
                     {
@@ -61,7 +60,7 @@ namespace HTTPClient
                             break;
                         case "none":
                             data["username"] = usr;
-                            data["password"] = DecodeFrom64(LocalGlobals.pws);
+                            data["password"] = pws;
                             break;
 
                     }
@@ -123,6 +122,32 @@ namespace HTTPClient
                         return;
                     }
                 }
+                // Check if user credentials are correct by sending a simple POST login request
+                using (var wb = new WebClient())
+                {
+                    var data = new NameValueCollection();
+
+                    // Enters login queue
+                    wb.Headers.Set("Content-type", "application/x-www-form-urlencoded");
+                    data["username"] = usr;
+                    data["password"] = pws;
+                    try
+                    {
+                        var response = wb.UploadValues(LocalGlobals.url, "POST", data);
+                        string responseInString = System.Text.Encoding.UTF8.GetString(response);
+                        dynamic response_json = JObject.Parse(responseInString);
+                        if (Convert.ToString(response_json.success) == "false")
+                        {
+                            MessageBox.Show(Convert.ToString(response_json.banner), "Yipes!");
+                            return;
+                        }
+                    }
+                    catch (Exception error)
+                    {
+                        MessageBox.Show(error.Message, "Error!");
+                    }
+                }
+                // Adds user info to json
                 json_Dictionary.Add(usr, EncodePasswordToBase64(pws));
                 json = JsonConvert.SerializeObject(json_Dictionary);
             }
@@ -260,19 +285,25 @@ namespace HTTPClient
 
                     // Logins to game using credientials
                     Console.WriteLine("SUCCESS: Logging you in to the Tooniverse...");
-                    MessageBox.Show("Logging you in to the Tooniverse...", "Successful Login");
                     Environment.SetEnvironmentVariable("TTR_GAMESERVER", Convert.ToString(json.gameserver));
                     Environment.SetEnvironmentVariable("TTR_PLAYCOOKIE", Convert.ToString(json.cookie));
-
-                    Directory.SetCurrentDirectory(@"C:\Program Files (x86)\Toontown Rewritten");
+                    string dir = Convert.ToString(Properties.Settings.Default["GameDirectory"]);
+                    Directory.SetCurrentDirectory(dir);
 
                     ProcessStartInfo startInfo = new ProcessStartInfo();
 
                     startInfo.FileName = "TTREngine.exe";
                     startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-
-                    // Starts game
-                    Process.Start(startInfo);
+                    try
+                    {
+                        // Starts game
+                        MessageBox.Show("Logging you in to the Tooniverse...", "Successful Login");
+                        Process.Start(startInfo);
+                    }
+                    catch (Exception start_error)
+                    {
+                        MessageBox.Show(Convert.ToString(start_error), "Error!");
+                    }
                     break;
             }
             

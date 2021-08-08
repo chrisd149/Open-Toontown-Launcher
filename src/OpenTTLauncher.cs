@@ -24,12 +24,12 @@ namespace OpenTTLauncher
         {
             // Starts timer
             Timer myTimer = new Timer();
-            populationLabel.Text = HTTPClient.WebRequest.getPopulation() + " toons";
+            populationLabel.Text = WebRequest.getPopulation() + " toons";
 
             var timer = new Timer { Interval = LocalGlobals.GETInterval };
             timer.Tick += (o, args) =>
             {
-                populationLabel.Text = HTTPClient.WebRequest.getPopulation() + " toons";
+                populationLabel.Text = WebRequest.getPopulation() + " toons";
             };
             timer.Start();
         }
@@ -38,13 +38,13 @@ namespace OpenTTLauncher
         {
             string username = usernameTextBox.Text;
             string password = passwordTextBox.Text;
-            HTTPClient.WebRequest.Main(username, password);
+            WebRequest.Main(username, password);
         }
 
         private void instructionsButton_Click(object sender, EventArgs e)
         {
             string message = "This launcher uses your login credentials to login to Toontown Rewritten.  You must have an account " +
-                "registered with Toontown Rewritten, which you can do at toontownrewritten.com.  You must also have Toontown Rewritten" +
+                "registered with Toontown Rewritten, which you can do at toontownrewritten.com.  You must also have Toontown Rewritten " +
                 "installed on your system, with it already updated (i.e. the offical launcher has been launched at least once.) " +
                 Environment.NewLine + Environment.NewLine +
                 "QuickLogin:" + Environment.NewLine +
@@ -96,7 +96,7 @@ namespace OpenTTLauncher
         {
             string username = usernameTextBox.Text;
             string password = passwordTextBox.Text;
-            string text_body = $"This will create a QuickAccount for {username}, which allows you to quickly login without entering any login credentials. " +
+            string text_body = $"This will create a QuickLogin account for {username}, which allows you to quickly login without entering any login credentials. " +
                 Environment.NewLine + Environment.NewLine +
                 $"Your login information for this account will be stored locally, with your password encrypted. " +
                 $" However, a risk is still present whenever personal account data is stored locally, and your login info can still be susceptible to bad actors. " +
@@ -105,7 +105,7 @@ namespace OpenTTLauncher
             DialogResult dialogResult = MessageBox.Show(text_body, "Confirm Quick Account", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                HTTPClient.WebRequest.createQuickAccount(username, password);
+                WebRequest.createQuickAccount(username, password);
                 refreshList();
             }
             else if (dialogResult == DialogResult.No)
@@ -118,7 +118,7 @@ namespace OpenTTLauncher
         private void Button2_Click(object sender, EventArgs e)
         {
             String usr = comboBox1.Text;
-            HTTPClient.WebRequest.quickLogin(usr);
+            WebRequest.quickLogin(usr);
         }
 
         private void Label6_Click(object sender, EventArgs e)
@@ -131,14 +131,26 @@ namespace OpenTTLauncher
         }
         public void refreshList()
         {
-            comboBox1.DataSource = HTTPClient.WebRequest.returnAccounts();
+            comboBox1.DataSource = WebRequest.returnAccounts();
         }
 
         private void Button3_Click(object sender, EventArgs e)
         {
             String usr = comboBox1.Text;
-            HTTPClient.WebRequest.removeUser(usr);
+            WebRequest.removeUser(usr);
             refreshList();
+        }
+
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderDlg = new FolderBrowserDialog();
+            DialogResult result = folderDlg.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string folderName = folderDlg.SelectedPath;
+                Properties.Settings.Default["GameDirectory"] = folderName;
+                Properties.Settings.Default.Save();
+            }
         }
     }
 }

@@ -47,6 +47,7 @@ namespace OpenTTLauncher
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // linkLabel
@@ -205,7 +206,7 @@ namespace OpenTTLauncher
             this.button1.BackColor = System.Drawing.Color.White;
             this.button1.Font = new System.Drawing.Font("Impress BT", 10F);
             this.button1.Location = new System.Drawing.Point(187, 284);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 37);
             this.button1.TabIndex = 19;
@@ -218,7 +219,7 @@ namespace OpenTTLauncher
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.Font = new System.Drawing.Font("Impress BT", 10F);
             this.button2.Location = new System.Drawing.Point(501, 284);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(128, 37);
             this.button2.TabIndex = 20;
@@ -233,7 +234,7 @@ namespace OpenTTLauncher
             this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(637, 300);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(160, 24);
             this.comboBox1.TabIndex = 21;
@@ -257,13 +258,28 @@ namespace OpenTTLauncher
             this.button3.BackColor = System.Drawing.Color.White;
             this.button3.Font = new System.Drawing.Font("Impress BT", 10F);
             this.button3.Location = new System.Drawing.Point(335, 284);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(157, 37);
             this.button3.TabIndex = 23;
             this.button3.Text = "Remove Account";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.White;
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button5.Font = new System.Drawing.Font("Impress BT", 10F);
+            this.button5.ForeColor = System.Drawing.Color.Black;
+            this.button5.Location = new System.Drawing.Point(9, 406);
+            this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(186, 38);
+            this.button5.TabIndex = 25;
+            this.button5.Text = "Set Game Directory";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.Button5_Click);
             // 
             // OpenTTLauncher
             // 
@@ -274,6 +290,7 @@ namespace OpenTTLauncher
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(989, 510);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBox1);
@@ -326,6 +343,7 @@ namespace OpenTTLauncher
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button5;
     }
 }
 
