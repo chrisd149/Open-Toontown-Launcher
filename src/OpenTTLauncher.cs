@@ -101,7 +101,7 @@ namespace OpenTTLauncher
                 $"Your login information for this account will be stored locally, with your password encrypted. " +
                 $" However, a risk is still present whenever personal account data is stored locally, and your login info can still be susceptible to bad actors. " +
                 Environment.NewLine + Environment.NewLine +
-                $"Do you still want to create a QuickLogin account for ${username}?";
+                $"Do you still want to create a QuickLogin account for {username}?";
             DialogResult dialogResult = MessageBox.Show(text_body, "Confirm Quick Account", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
