@@ -122,31 +122,7 @@ namespace OpenTTLauncher
                         return;
                     }
                 }
-                // Check if user credentials are correct by sending a simple POST login request
-                using (var wb = new WebClient())
-                {
-                    var data = new NameValueCollection();
-
-                    // Enters login queue
-                    wb.Headers.Set("Content-type", "application/x-www-form-urlencoded");
-                    data["username"] = usr;
-                    data["password"] = pws;
-                    try
-                    {
-                        var response = wb.UploadValues(LocalGlobals.url, "POST", data);
-                        string responseInString = System.Text.Encoding.UTF8.GetString(response);
-                        dynamic response_json = JObject.Parse(responseInString);
-                        if (Convert.ToString(response_json.success) == "false")
-                        {
-                            MessageBox.Show(Convert.ToString(response_json.banner), "Yipes!");
-                            return;
-                        }
-                    }
-                    catch (Exception error)
-                    {
-                        MessageBox.Show(error.Message, "Error!");
-                    }
-                }
+           
                 // Adds user info to json
                 json_Dictionary.Add(usr, EncodePasswordToBase64(pws));
                 json = JsonConvert.SerializeObject(json_Dictionary);
@@ -159,7 +135,32 @@ namespace OpenTTLauncher
                 };
                 json = JsonConvert.SerializeObject(columns);
             }
-            
+            // Check if user credentials are correct by sending a simple POST login request
+            using (var wb = new WebClient())
+            {
+                var data = new NameValueCollection();
+
+                // Enters login queue
+                wb.Headers.Set("Content-type", "application/x-www-form-urlencoded");
+                data["username"] = usr;
+                data["password"] = pws;
+                try
+                {
+                    var response = wb.UploadValues(LocalGlobals.url, "POST", data);
+                    string responseInString = System.Text.Encoding.UTF8.GetString(response);
+                    dynamic response_json = JObject.Parse(responseInString);
+                    if (Convert.ToString(response_json.success) == "false")
+                    {
+                        MessageBox.Show(Convert.ToString(response_json.banner), "Yipes!");
+                        return;
+                    }
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error!");
+                }
+            }
+
             // Write json string to file
             System.IO.File.WriteAllText(@".\quicklogin.json", json);
             MessageBox.Show($"Added {usr} to QuickLogin!", "Account Added");
