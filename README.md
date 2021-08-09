@@ -2,6 +2,10 @@
 A .NET GUI launcher for Toontown Rewritten.
 
 ## Installing
+### Windows
+Simply download the Setup.msi file from the [latest release](https://github.com/chrisd149/Open-Toontown-Launcher/releases), and run the installer.
+
+### Full Binary Installation 
 You must have a recent version of Visual Studio 19 installed in order to build the project solution, as well as MSBuild installed.  You must also have CMake installed to build the project from the command line.
 
 Example steps to build the project with Visual Studio 2019 and MSBuild:
