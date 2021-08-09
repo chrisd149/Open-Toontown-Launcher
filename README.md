@@ -17,7 +17,7 @@ msbuild /p:Configuration=Release ALL_BUILD.vcxproj
 ```
 
 ## Running the project
-The executable for the program will be located in `build/src/Release`.  Simply run the file and the program will start! (You can also copy the file to a more convenient location or create a shortcut.)
+A shortcut will be created on your desktop for the program. Run the file and the launcher will start!
 
 The launcher implements several new features on top of the UI change from the official launcher.  You can now setup a QuickLogin account, which allows you to easily store an account for the launcher to use, which can then launch the game without requiring user credentials to be entered.  Accounts are stored even after the program is shut down, so you can easily and quickly login on added accounts.  The launcher also features a live counter of the population of Toontown.
 
