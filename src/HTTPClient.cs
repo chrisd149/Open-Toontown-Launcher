@@ -289,7 +289,7 @@ namespace OpenTTLauncher
                     Environment.SetEnvironmentVariable("TTR_GAMESERVER", Convert.ToString(json.gameserver));
                     Environment.SetEnvironmentVariable("TTR_PLAYCOOKIE", Convert.ToString(json.cookie));
                     string dir = Convert.ToString(Properties.Settings.Default["GameDirectory"]);
-                    Directory.SetCurrentDirectory(dir);
+                    
 
                     ProcessStartInfo startInfo = new ProcessStartInfo();
 
@@ -297,6 +297,7 @@ namespace OpenTTLauncher
                     startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                     try
                     {
+                        Directory.SetCurrentDirectory(dir);
                         // Starts game
                         MessageBox.Show("Logging you in to the Tooniverse...", "Successful Login");
                         Process.Start(startInfo);
