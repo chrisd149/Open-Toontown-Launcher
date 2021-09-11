@@ -97,29 +97,38 @@ namespace OpenTTLauncher
         {
             string username = usernameTextBox.Text;
             string password = passwordTextBox.Text;
-            string text_body = $"This will create a QuickLogin account for {username}, which allows you to quickly login without entering any login credentials. " +
+            // No username and/or password entered
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("No username and/or password entered!", "Incorrect Login Information");
+                return;
+            }
+            else {
+                string text_body = $"This will create a QuickLogin account for {username}, which allows you to quickly login without entering any login credentials. " +
                 Environment.NewLine + Environment.NewLine +
                 $"Your login information for this account will be stored locally, with your password encrypted. " +
                 $" However, a risk is still present whenever personal account data is stored locally, and your login info can still be susceptible to bad actors. " +
                 Environment.NewLine + Environment.NewLine +
                 $"Do you still want to create a QuickLogin account for {username}?";
-            DialogResult dialogResult = MessageBox.Show(text_body, "Confirm Quick Account", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
-                WebRequest.createQuickAccount(username, password);
-                refreshList();
+                DialogResult dialogResult = MessageBox.Show(text_body, "Confirm Quick Account", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    LauncherProgram.createQuickAccount(username, password);
+                    refreshList();
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
             }
-            else if (dialogResult == DialogResult.No)
-            {
-                return;
-            }
+            
             
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
             String usr = comboBox1.Text;
-            WebRequest.quickLogin(usr);
+            LauncherProgram.quickLogin(usr);
         }
 
         private void Label6_Click(object sender, EventArgs e)
@@ -132,13 +141,13 @@ namespace OpenTTLauncher
         }
         public void refreshList()
         {
-            comboBox1.DataSource = WebRequest.returnAccounts();
+            comboBox1.DataSource = LauncherProgram.returnAccounts();
         }
 
         private void Button3_Click(object sender, EventArgs e)
         {
             String usr = comboBox1.Text;
-            WebRequest.removeUser(usr);
+            LauncherProgram.removeUser(usr);
             refreshList();
         }
 

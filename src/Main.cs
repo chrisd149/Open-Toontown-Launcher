@@ -21,8 +21,7 @@ namespace OpenTTLauncher
         {
             //Set username and password as globals
             LocalGlobals.usr = usr;
-            LocalGlobals.pws = EncodePasswordToBase64(pws);
-
+            LocalGlobals.pws = LauncherProgram.EncodePasswordToBase64(pws);
 
             // Checks for username and password
             if (string.IsNullOrEmpty(usr) || string.IsNullOrEmpty(pws))
@@ -32,54 +31,128 @@ namespace OpenTTLauncher
             }
             else
             {
-                using (var wb = new WebClient())
+                var data = new NameValueCollection();
+
+                // Enters login queue
+                switch (responseStatus)
                 {
-                    var data = new NameValueCollection();
+                    case "delayed":
+                        data["queueToken"] = LocalGlobals.queueToken;
+                        break;
+                    // Incorrect login details
+                    case "false":
+                        MessageBox.Show(LocalGlobals.banner, "Yipes!");
+                        return;
+                    // Allows user to enter 2FA or ToonGuard token to login
+                    case "partial":
+                        data["appToken"] = Interaction.InputBox(LocalGlobals.banner, "Authorization Token Needed", "");
+                        data["authToken"] = LocalGlobals.responseToken;
 
-                    // Enters login queue
-                    wb.Headers.Set("Content-type", "application/x-www-form-urlencoded");
-                    switch (responseStatus)
-                    {
-                        case "delayed":
-                            data["queueToken"] = LocalGlobals.queueToken;
-                            break;
-                        // Incorrect login details
-                        case "false":
-                            MessageBox.Show(LocalGlobals.banner, "Yipes!");
+                        // Exit login sequence if auth pop up is closed
+                        if (string.IsNullOrWhiteSpace(data["appToken"]))
+                        {
                             return;
-                        // Allows user to enter 2FA or ToonGuard token to login
-                        case "partial":
-                            data["appToken"] = Interaction.InputBox(LocalGlobals.banner, "Authorization Token Needed", "");
-                            data["authToken"] = LocalGlobals.responseToken;
+                        }
+                        break;
+                    case "none":
+                        data["username"] = usr;
+                        data["password"] = pws;
+                        break;
 
-                            // Exit login sequence if auth pop up is closed
-                            if (string.IsNullOrWhiteSpace(data["appToken"]))
-                            {
-                                return;
-                            }
-                            break;
-                        case "none":
-                            data["username"] = usr;
-                            data["password"] = pws;
-                            break;
-
-                    }
-                    // Sends POST response
-                    try
-                    {
-                        var response = wb.UploadValues(LocalGlobals.url, "POST", data);
-                        string responseInString = System.Text.Encoding.UTF8.GetString(response);
-                        Console.WriteLine(response);
-                        HTTPStatus(responseInString);
-                    }
-                    catch (Exception error)
-                    {
-                        MessageBox.Show(error.Message, "Error!");
-                    }
+                }
+                // Sends POST response
+                var login_process = HTTPPostClient(data);
+                if (login_process is String)
+                {
+                    HTTPStatus(login_process);
+                }
+                else
+                {
+                    return;
                 }
             }
         }
-    
+        public static string HTTPPostClient(NameValueCollection data)
+        {
+            // Sends POST response
+            using (var wb = new WebClient())
+            {
+                wb.Headers.Set("Content-type", "application/x-www-form-urlencoded");
+                wb.Headers.Add("User-Agent", "Project: Open Toontown Launcher, Author: Christian Diaz, Email: christianmigueldiaz@gmail.com");
+                try
+                {
+                    var response = wb.UploadValues(LocalGlobals.url, "POST", data);
+                    string responseInString = System.Text.Encoding.UTF8.GetString(response);
+                    Console.WriteLine(response);
+                    return responseInString;
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error!");
+                    return null;
+                }
+            }
+        }
+
+        public static void HTTPStatus(string response)
+        {
+            // JObject is used to get values from the response
+            dynamic json = JObject.Parse(response);
+            switch (Convert.ToString(json.success))
+            {
+                case "false":
+                    LocalGlobals.banner = json.banner;
+                    Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
+                    break;
+                case "delayed":
+                    // Adds 1 second to delay
+                    LocalGlobals.timeToWait += 1000;
+                    Task.Delay(LocalGlobals.timeToWait).Wait();
+
+                    // Sends another POST request with the queueToken only
+                    LocalGlobals.queueToken = json.queueToken;
+                    Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
+                    break;
+                case "partial":
+                    LocalGlobals.banner = json.banner;
+                    // Adds 1 second to delay
+                    LocalGlobals.timeToWait += 1000;
+                    Task.Delay(LocalGlobals.timeToWait).Wait();
+
+                    // Sends another POST request with the authToken and responseToken only
+                    LocalGlobals.responseToken = json.responseToken;
+                    Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
+                    break;
+                case "true":
+                    LocalGlobals.timeToWait = 0;
+                    LocalGlobals.GETInterval = 150000;
+
+                    // Logins to game using credientials
+                    Console.WriteLine("SUCCESS: Logging you in to the Tooniverse...");
+                    Environment.SetEnvironmentVariable("TTR_GAMESERVER", Convert.ToString(json.gameserver));
+                    Environment.SetEnvironmentVariable("TTR_PLAYCOOKIE", Convert.ToString(json.cookie));
+                    string dir = Convert.ToString(Properties.Settings.Default["GameDirectory"]);
+
+
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+
+                    startInfo.FileName = "TTREngine.exe";
+                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                    try
+                    {
+                        Directory.SetCurrentDirectory(dir);
+                        // Starts game
+                        MessageBox.Show("Logging you in to the Tooniverse...", "Successful Login");
+                        Process.Start(startInfo);
+                    }
+                    catch (Exception start_error)
+                    {
+                        MessageBox.Show(Convert.ToString(start_error), "Error!");
+                    }
+                    break;
+            }
+        }
+
         public static string getPopulation()
         // Returns current population of Toontown to live counter on launcher
         {
@@ -97,17 +170,13 @@ namespace OpenTTLauncher
                 return population;
             }
         }
+    }
+    public static class LauncherProgram
+    {
 
         public static void createQuickAccount(string usr, string pws)
         // Adds new QuickLogin account
         {
-            // No username and/or password entered
-            if (string.IsNullOrEmpty(usr) || string.IsNullOrEmpty(pws))
-            {
-                MessageBox.Show("No username or password entered!", "Incorrect Login Information");
-                return;
-            }
-
             string json;
             // If the json already exists, we have to get the data from it, convert it to a dictionary, modify the dictionary, and then create the json.
             if (File.Exists(LocalGlobals.jsonFileLoc)){
@@ -136,29 +205,16 @@ namespace OpenTTLauncher
                 json = JsonConvert.SerializeObject(columns);
             }
             // Check if user credentials are correct by sending a simple POST login request
-            using (var wb = new WebClient())
-            {
-                var data = new NameValueCollection();
+            var data = new NameValueCollection();
+            data["username"] = usr;
+            data["password"] = pws;
+            var login_process = WebRequest.HTTPPostClient(data);
+            dynamic response_json = JObject.Parse(login_process);
 
-                // Enters login queue
-                wb.Headers.Set("Content-type", "application/x-www-form-urlencoded");
-                data["username"] = usr;
-                data["password"] = pws;
-                try
-                {
-                    var response = wb.UploadValues(LocalGlobals.url, "POST", data);
-                    string responseInString = System.Text.Encoding.UTF8.GetString(response);
-                    dynamic response_json = JObject.Parse(responseInString);
-                    if (Convert.ToString(response_json.success) == "false")
-                    {
-                        MessageBox.Show(Convert.ToString(response_json.banner), "Yipes!");
-                        return;
-                    }
-                }
-                catch (Exception error)
-                {
-                    MessageBox.Show(error.Message, "Error!");
-                }
+            if (Convert.ToString(response_json.success) == "false")
+            {
+                MessageBox.Show(Convert.ToString(response_json.banner), "Yipes!");
+                return;
             }
 
             // Write json string to file
@@ -208,7 +264,7 @@ namespace OpenTTLauncher
                         // Found the account, get it's password and login.
                         object pws = json_Dictionary[usr];
                         string decoded_pws = DecodeFrom64(Convert.ToString(pws));
-                        Main(Convert.ToString(usr), decoded_pws);
+                        WebRequest.Main(Convert.ToString(usr), decoded_pws);
                         return;
                     }
                 }
@@ -250,65 +306,6 @@ namespace OpenTTLauncher
                 System.IO.File.WriteAllText(LocalGlobals.jsonFileLoc, json);
                 MessageBox.Show($"Removed {usr} from QuickLogin!", "Account Removed");
             }
-        }
-        public static void HTTPStatus(string response)
-        {
-            // JObject is used to get values from the response
-            dynamic json = JObject.Parse(response);
-            switch (Convert.ToString(json.success))
-            {
-                case "false":
-                    LocalGlobals.banner = json.banner;
-                    Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
-                    break;
-                case "delayed":
-                    // Adds 1 second to delay
-                    LocalGlobals.timeToWait += 1000;
-                    Task.Delay(LocalGlobals.timeToWait).Wait();
-
-                    // Sends another POST request with the queueToken only
-                    LocalGlobals.queueToken = json.queueToken;
-                    Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
-                    break;
-                case "partial":
-                    LocalGlobals.banner = json.banner;
-                    // Adds 1 second to delay
-                    LocalGlobals.timeToWait += 1000;
-                    Task.Delay(LocalGlobals.timeToWait).Wait();
-
-                    // Sends another POST request with the authToken and responseToken only
-                    LocalGlobals.responseToken = json.responseToken;
-                    Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
-                    break;
-                case "true":
-                    LocalGlobals.timeToWait = 0;
-                    LocalGlobals.GETInterval = 150000;
-
-                    // Logins to game using credientials
-                    Console.WriteLine("SUCCESS: Logging you in to the Tooniverse...");
-                    Environment.SetEnvironmentVariable("TTR_GAMESERVER", Convert.ToString(json.gameserver));
-                    Environment.SetEnvironmentVariable("TTR_PLAYCOOKIE", Convert.ToString(json.cookie));
-                    string dir = Convert.ToString(Properties.Settings.Default["GameDirectory"]);
-                    
-
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-
-                    startInfo.FileName = "TTREngine.exe";
-                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                    try
-                    {
-                        Directory.SetCurrentDirectory(dir);
-                        // Starts game
-                        MessageBox.Show("Logging you in to the Tooniverse...", "Successful Login");
-                        Process.Start(startInfo);
-                    }
-                    catch (Exception start_error)
-                    {
-                        MessageBox.Show(Convert.ToString(start_error), "Error!");
-                    }
-                    break;
-            }
-            
         }
     }
 }

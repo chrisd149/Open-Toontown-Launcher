@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HTTPClient.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="LocalGlobals.cs" />
     <Compile Include="OpenTTLauncher.cs">
       <SubType>Form</SubType>
