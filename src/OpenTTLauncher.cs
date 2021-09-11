@@ -11,6 +11,7 @@ namespace OpenTTLauncher
         {
             InitializeComponent();
             currentPopulation();
+            LocalGlobals.jsonFileLoc = $"{System.IO.Directory.GetCurrentDirectory()}\\quicklogin.json";
             refreshList();
         }
 

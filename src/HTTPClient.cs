@@ -110,8 +110,8 @@ namespace OpenTTLauncher
 
             string json;
             // If the json already exists, we have to get the data from it, convert it to a dictionary, modify the dictionary, and then create the json.
-            if (File.Exists(@".\quicklogin.json")){
-                string jsonFile = File.ReadAllText(@".\quicklogin.json");
+            if (File.Exists(LocalGlobals.jsonFileLoc)){
+                string jsonFile = File.ReadAllText(LocalGlobals.jsonFileLoc);
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(jsonFile);
                 foreach (var item in json_Dictionary.Keys)
                 {
@@ -162,7 +162,7 @@ namespace OpenTTLauncher
             }
 
             // Write json string to file
-            System.IO.File.WriteAllText(@".\quicklogin.json", json);
+            System.IO.File.WriteAllText(LocalGlobals.jsonFileLoc, json);
             MessageBox.Show($"Added {usr} to QuickLogin!", "Account Added");
         }
 
@@ -197,9 +197,9 @@ namespace OpenTTLauncher
         // QuickLogin function
         // Logins with the currently selected account.
         {
-            if (File.Exists(@".\quicklogin.json"))
+            if (File.Exists(LocalGlobals.jsonFileLoc))
             {
-                string json = File.ReadAllText(@".\quicklogin.json");
+                string json = File.ReadAllText(LocalGlobals.jsonFileLoc);
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
                 foreach (var item in json_Dictionary.Keys)
                 {
@@ -223,9 +223,9 @@ namespace OpenTTLauncher
         public static List<string> returnAccounts()
         // Returns list of accounts in json.  Used to update dropdownlist of accounts.
         {
-            if (File.Exists(@".\quicklogin.json"))
+            if (File.Exists(LocalGlobals.jsonFileLoc))
             {
-                string json = File.ReadAllText(@".\quicklogin.json");
+                string json = File.ReadAllText(LocalGlobals.jsonFileLoc);
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
                 // Convert keys (account usernames) to list.
                 List<string> accounts = new List<string>(json_Dictionary.Keys);
@@ -240,14 +240,14 @@ namespace OpenTTLauncher
         public static void removeUser(string usr)
         // Removes selected account from json.
         {
-            if (File.Exists(@".\quicklogin.json"))
+            if (File.Exists(LocalGlobals.jsonFileLoc))
             {
                 // Simular to adding a user, we must convert the file to dict and then back to json.
-                string json = File.ReadAllText(@".\quicklogin.json");
+                string json = File.ReadAllText(LocalGlobals.jsonFileLoc);
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
                 json_Dictionary.Remove(usr);
                 json = JsonConvert.SerializeObject(json_Dictionary);
-                System.IO.File.WriteAllText(@".\quicklogin.json", json);
+                System.IO.File.WriteAllText(LocalGlobals.jsonFileLoc, json);
                 MessageBox.Show($"Removed {usr} from QuickLogin!", "Account Removed");
             }
         }
