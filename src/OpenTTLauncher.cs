@@ -8,10 +8,11 @@ namespace OpenTTLauncher
     public partial class OpenTTLauncher : Form
     {
         public OpenTTLauncher()
-        {
+        { 
             InitializeComponent();
             CurrentPopulation();
             LocalGlobals.jsonFileLoc = $"{System.IO.Directory.GetCurrentDirectory()}\\quicklogin.json";
+            VersionLabel.Text = $"v{Application.ProductVersion}";
             RefreshList();
         }
 
@@ -158,6 +159,10 @@ namespace OpenTTLauncher
         }
 
         private void QuickLoginComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void VersionLabel_Click(object sender, EventArgs e)
         {
         }
     }

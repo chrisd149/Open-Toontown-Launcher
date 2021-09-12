@@ -48,6 +48,7 @@ namespace OpenTTLauncher
             this.QuickLoginLabel = new System.Windows.Forms.Label();
             this.RemoveAcctButton = new System.Windows.Forms.Button();
             this.GameDirButton = new System.Windows.Forms.Button();
+            this.VersionLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LinkLabel
@@ -281,6 +282,21 @@ namespace OpenTTLauncher
             this.GameDirButton.UseVisualStyleBackColor = false;
             this.GameDirButton.Click += new System.EventHandler(this.GameDirButton_Click);
             // 
+            // VersionLabel
+            // 
+            this.VersionLabel.AutoSize = true;
+            this.VersionLabel.BackColor = System.Drawing.Color.Transparent;
+            this.VersionLabel.Font = new System.Drawing.Font("Impress BT", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VersionLabel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.VersionLabel.Location = new System.Drawing.Point(943, -1);
+            this.VersionLabel.Name = "VersionLabel";
+            this.VersionLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.VersionLabel.Size = new System.Drawing.Size(45, 17);
+            this.VersionLabel.TabIndex = 26;
+            this.VersionLabel.Text = "v1.0.0";
+            this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.VersionLabel.Click += new System.EventHandler(this.VersionLabel_Click);
+            // 
             // OpenTTLauncher
             // 
             this.AcceptButton = this.LoginButton;
@@ -290,6 +306,7 @@ namespace OpenTTLauncher
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(989, 510);
+            this.Controls.Add(this.VersionLabel);
             this.Controls.Add(this.GameDirButton);
             this.Controls.Add(this.RemoveAcctButton);
             this.Controls.Add(this.QuickLoginLabel);
@@ -344,6 +361,7 @@ namespace OpenTTLauncher
         private System.Windows.Forms.Label QuickLoginLabel;
         private System.Windows.Forms.Button RemoveAcctButton;
         private System.Windows.Forms.Button GameDirButton;
+        private System.Windows.Forms.Label VersionLabel;
     }
 }
 
