@@ -17,7 +17,7 @@ namespace OpenTTLauncher
 {
     public static class WebRequest
     {
-        public static void Main(string usr, string pws, string responseStatus = "none")
+        public static void Login(string usr, string pws, string responseStatus = "none")
         {
             //Set username and password as globals
             LocalGlobals.usr = usr;
@@ -36,14 +36,15 @@ namespace OpenTTLauncher
                 // Enters login queue
                 switch (responseStatus)
                 {
+                    // Second POST before logging in.
                     case "delayed":
                         data["queueToken"] = LocalGlobals.queueToken;
                         break;
-                    // Incorrect login details
+                    // User entered incorrect login details
                     case "false":
                         MessageBox.Show(LocalGlobals.banner, "Yipes!");
                         return;
-                    // Allows user to enter 2FA or ToonGuard token to login
+                    // Prompts user to enter 2FA or ToonGuard token to login
                     case "partial":
                         data["appToken"] = Interaction.InputBox(LocalGlobals.banner, "Authorization Token Needed", "");
                         data["authToken"] = LocalGlobals.responseToken;
@@ -54,20 +55,22 @@ namespace OpenTTLauncher
                             return;
                         }
                         break;
+                    // Intial POST to login
                     case "none":
                         data["username"] = usr;
                         data["password"] = pws;
                         break;
-
                 }
                 // Sends POST response
                 var login_process = HTTPPostClient(data);
                 if (login_process is String)
                 {
+                    // Good POST request, client now starts login process.
                     HTTPStatus(login_process);
                 }
                 else
                 {
+                    // HTTPPostClient has run into an error and has notfied the user.
                     return;
                 }
             }
@@ -102,7 +105,7 @@ namespace OpenTTLauncher
             {
                 case "false":
                     LocalGlobals.banner = json.banner;
-                    Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
+                    Login(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
                     break;
                 case "delayed":
                     // Adds 1 second to delay
@@ -111,7 +114,7 @@ namespace OpenTTLauncher
 
                     // Sends another POST request with the queueToken only
                     LocalGlobals.queueToken = json.queueToken;
-                    Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
+                    Login(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
                     break;
                 case "partial":
                     LocalGlobals.banner = json.banner;
@@ -121,7 +124,7 @@ namespace OpenTTLauncher
 
                     // Sends another POST request with the authToken and responseToken only
                     LocalGlobals.responseToken = json.responseToken;
-                    Main(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
+                    Login(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
                     break;
                 case "true":
                     LocalGlobals.timeToWait = 0;
@@ -153,7 +156,7 @@ namespace OpenTTLauncher
             }
         }
 
-        public static string getPopulation()
+        public static string GetPopulation()
         // Returns current population of Toontown to live counter on launcher
         {
             string population_url = "https://www.toontownrewritten.com/api/population";
@@ -174,7 +177,7 @@ namespace OpenTTLauncher
     public static class LauncherProgram
     {
 
-        public static void createQuickAccount(string usr, string pws)
+        public static void CreateQuickAccount(string usr, string pws)
         // Adds new QuickLogin account
         {
             string json;
@@ -223,6 +226,10 @@ namespace OpenTTLauncher
         }
 
         public static string EncodePasswordToBase64(string password)
+        // Encodes passwords stored to hopefully reduce issues.
+        //
+        // This isn't very secure, but I haven't found a way of making a more
+        // secure password encoder without frying my brain.
         {
             try
             {
@@ -236,8 +243,9 @@ namespace OpenTTLauncher
                 throw new Exception("Error in base64Encode" + ex.Message);
             }
         }
-        //this function Convert to Decord your Password
+
         public static string DecodeFrom64(string encodedPassword)
+        // Decodes stored passwords to be used for login.
         {
             System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
             System.Text.Decoder utf8Decode = encoder.GetDecoder();
@@ -249,10 +257,16 @@ namespace OpenTTLauncher
             return result;
         }
 
-        public static void quickLogin(string usr)
-        // QuickLogin function
+        public static void QuickLogin(string usr)
+        // QuickLogin function.
         // Logins with the currently selected account.
         {
+            if (usr.Length == 0)
+            {
+                // No account selected
+                MessageBox.Show($"No user was selected for QuickLogin!", "No Account Selected");
+                return;
+            }
             if (File.Exists(LocalGlobals.jsonFileLoc))
             {
                 string json = File.ReadAllText(LocalGlobals.jsonFileLoc);
@@ -264,7 +278,7 @@ namespace OpenTTLauncher
                         // Found the account, get it's password and login.
                         object pws = json_Dictionary[usr];
                         string decoded_pws = DecodeFrom64(Convert.ToString(pws));
-                        WebRequest.Main(Convert.ToString(usr), decoded_pws);
+                        WebRequest.Login(Convert.ToString(usr), decoded_pws);
                         return;
                     }
                 }
@@ -276,7 +290,7 @@ namespace OpenTTLauncher
                 return;
             }
         }
-        public static List<string> returnAccounts()
+        public static List<string> ReturnAccounts()
         // Returns list of accounts in json.  Used to update dropdownlist of accounts.
         {
             if (File.Exists(LocalGlobals.jsonFileLoc))
@@ -293,7 +307,7 @@ namespace OpenTTLauncher
             }
         }
 
-        public static void removeUser(string usr)
+        public static void RemoveUser(string usr)
         // Removes selected account from json.
         {
             if (File.Exists(LocalGlobals.jsonFileLoc))
@@ -301,10 +315,27 @@ namespace OpenTTLauncher
                 // Simular to adding a user, we must convert the file to dict and then back to json.
                 string json = File.ReadAllText(LocalGlobals.jsonFileLoc);
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
-                json_Dictionary.Remove(usr);
-                json = JsonConvert.SerializeObject(json_Dictionary);
-                System.IO.File.WriteAllText(LocalGlobals.jsonFileLoc, json);
-                MessageBox.Show($"Removed {usr} from QuickLogin!", "Account Removed");
+                bool usr_in_list = false;
+                foreach (var item in json_Dictionary.Keys)
+                {
+                    if (usr == Convert.ToString(item))
+                    {
+                        usr_in_list = true;
+                    }
+                }
+                if (usr_in_list is false)
+                {
+                    // No QuickLogin account selected, so we can't remove anything.
+                    MessageBox.Show($"Select a QuickLogin account to remove.", "Select an Account");
+                    return;
+                }
+                else
+                {
+                    json_Dictionary.Remove(usr);
+                    json = JsonConvert.SerializeObject(json_Dictionary);
+                    System.IO.File.WriteAllText(LocalGlobals.jsonFileLoc, json);
+                    MessageBox.Show($"Removed {usr} from QuickLogin!", "Account Removed");
+                }
             }
         }
     }

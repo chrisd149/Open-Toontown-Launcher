@@ -10,39 +10,39 @@ namespace OpenTTLauncher
         public OpenTTLauncher()
         {
             InitializeComponent();
-            currentPopulation();
+            CurrentPopulation();
             LocalGlobals.jsonFileLoc = $"{System.IO.Directory.GetCurrentDirectory()}\\quicklogin.json";
-            refreshList();
+            RefreshList();
         }
 
-        private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/chrisd149/Open-Toontown-Launcher");
 
         }
 
-        private void currentPopulation()
+        private void CurrentPopulation()
         {
             // Starts timer
             Timer myTimer = new Timer();
-            populationLabel.Text = WebRequest.getPopulation() + " toons";
+            PopCounterLabel.Text = WebRequest.GetPopulation() + " toons";
 
             var timer = new Timer { Interval = LocalGlobals.GETInterval };
             timer.Tick += (o, args) =>
             {
-                populationLabel.Text = WebRequest.getPopulation() + " toons";
+                PopCounterLabel.Text = WebRequest.GetPopulation() + " toons";
             };
             timer.Start();
         }
 
-        private void loginButton_Click(object sender, EventArgs e)
+        private void LoginButton_Click(object sender, EventArgs e)
         {
-            string username = usernameTextBox.Text;
-            string password = passwordTextBox.Text;
-            WebRequest.Main(username, password);
+            string username = UserTextBox.Text;
+            string password = PwsdTextBox.Text;
+            WebRequest.Login(username, password);
         }
 
-        private void instructionsButton_Click(object sender, EventArgs e)
+        private void InstructionsButton_Click(object sender, EventArgs e)
         {
             string message = "This launcher uses your login credentials to login to Toontown Rewritten.  You must have an account " +
                 "registered with Toontown Rewritten, which you can do at toontownrewritten.com.  You must also have Toontown Rewritten " +
@@ -58,52 +58,18 @@ namespace OpenTTLauncher
             string title = "Instructions";
             MessageBox.Show(message, title);
         }
-
-        private void Form1_Load(object sender, EventArgs e)
+        private void SaveAcctButton_Click(object sender, EventArgs e)
         {
-            
-        }
-
-        private void Label1_Click_2(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Label2_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void UsernameTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Label1_Click_3(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            string username = usernameTextBox.Text;
-            string password = passwordTextBox.Text;
+            string username = UserTextBox.Text;
+            string password = PwsdTextBox.Text;
             // No username and/or password entered
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 MessageBox.Show("No username and/or password entered!", "Incorrect Login Information");
                 return;
             }
-            else {
+            else
+            {
                 string text_body = $"This will create a QuickLogin account for {username}, which allows you to quickly login without entering any login credentials. " +
                 Environment.NewLine + Environment.NewLine +
                 $"Your login information for this account will be stored locally, with your password encrypted. " +
@@ -113,45 +79,29 @@ namespace OpenTTLauncher
                 DialogResult dialogResult = MessageBox.Show(text_body, "Confirm Quick Account", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    LauncherProgram.createQuickAccount(username, password);
-                    refreshList();
+                    LauncherProgram.CreateQuickAccount(username, password);
+                    RefreshList();
                 }
                 else if (dialogResult == DialogResult.No)
                 {
                     return;
                 }
             }
-            
-            
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        public void RefreshList()
         {
-            String usr = comboBox1.Text;
-            LauncherProgram.quickLogin(usr);
+            QuickLoginComboBox.DataSource = LauncherProgram.ReturnAccounts();
         }
 
-        private void Label6_Click(object sender, EventArgs e)
+        private void RemoveAcctButton_Click(object sender, EventArgs e)
         {
-
+            String usr = QuickLoginComboBox.Text;
+            LauncherProgram.RemoveUser(usr);
+            RefreshList();
         }
 
-        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-        public void refreshList()
-        {
-            comboBox1.DataSource = LauncherProgram.returnAccounts();
-        }
-
-        private void Button3_Click(object sender, EventArgs e)
-        {
-            String usr = comboBox1.Text;
-            LauncherProgram.removeUser(usr);
-            refreshList();
-        }
-
-        private void Button5_Click(object sender, EventArgs e)
+        private void GameDirButton_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderDlg = new FolderBrowserDialog();
             DialogResult result = folderDlg.ShowDialog();
@@ -161,6 +111,54 @@ namespace OpenTTLauncher
                 Properties.Settings.Default["GameDirectory"] = folderName;
                 Properties.Settings.Default.Save();
             }
+        }
+
+        private void QuickLoginButton_Click(object sender, EventArgs e)
+        {
+            String usr = QuickLoginComboBox.Text;
+            LauncherProgram.QuickLogin(usr);
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void AuthLabel_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PopCounterLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void UsernameTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PwsdLabel_Click_3(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TitleLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PopLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void QuickLoginLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void QuickLoginComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
         }
     }
 }

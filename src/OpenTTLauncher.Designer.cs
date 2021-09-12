@@ -29,285 +29,285 @@ namespace OpenTTLauncher
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OpenTTLauncher));
-            this.linkLabel = new System.Windows.Forms.LinkLabel();
-            this.loginButton = new System.Windows.Forms.Button();
-            this.usernameTextBox = new System.Windows.Forms.TextBox();
-            this.passwordTextBox = new System.Windows.Forms.TextBox();
-            this.authLabel = new System.Windows.Forms.Label();
-            this.populationLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.instructionsButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.LinkLabel = new System.Windows.Forms.LinkLabel();
+            this.LoginButton = new System.Windows.Forms.Button();
+            this.UserTextBox = new System.Windows.Forms.TextBox();
+            this.PwsdTextBox = new System.Windows.Forms.TextBox();
+            this.AuthLabel = new System.Windows.Forms.Label();
+            this.PopCounterLabel = new System.Windows.Forms.Label();
+            this.PwsdLabel = new System.Windows.Forms.Label();
+            this.UserLabel = new System.Windows.Forms.Label();
+            this.TitleLabel = new System.Windows.Forms.Label();
+            this.DescLabel = new System.Windows.Forms.Label();
+            this.PopLabel = new System.Windows.Forms.Label();
+            this.InstructionsButton = new System.Windows.Forms.Button();
+            this.SaveAcctButton = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.button2 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.QuickLoginButton = new System.Windows.Forms.Button();
+            this.QuickLoginComboBox = new System.Windows.Forms.ComboBox();
+            this.QuickLoginLabel = new System.Windows.Forms.Label();
+            this.RemoveAcctButton = new System.Windows.Forms.Button();
+            this.GameDirButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // linkLabel
+            // LinkLabel
             // 
-            this.linkLabel.AutoSize = true;
-            this.linkLabel.BackColor = System.Drawing.Color.Transparent;
-            this.linkLabel.Font = new System.Drawing.Font("Impress BT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel.LinkColor = System.Drawing.Color.Navy;
-            this.linkLabel.Location = new System.Drawing.Point(419, 471);
-            this.linkLabel.Name = "linkLabel";
-            this.linkLabel.Size = new System.Drawing.Size(159, 25);
-            this.linkLabel.TabIndex = 0;
-            this.linkLabel.TabStop = true;
-            this.linkLabel.Text = "Github repository";
-            this.linkLabel.UseWaitCursor = true;
-            this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+            this.LinkLabel.AutoSize = true;
+            this.LinkLabel.BackColor = System.Drawing.Color.Transparent;
+            this.LinkLabel.Font = new System.Drawing.Font("Impress BT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LinkLabel.LinkColor = System.Drawing.Color.Navy;
+            this.LinkLabel.Location = new System.Drawing.Point(419, 471);
+            this.LinkLabel.Name = "LinkLabel";
+            this.LinkLabel.Size = new System.Drawing.Size(159, 25);
+            this.LinkLabel.TabIndex = 0;
+            this.LinkLabel.TabStop = true;
+            this.LinkLabel.Text = "Github repository";
+            this.LinkLabel.UseWaitCursor = true;
+            this.LinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
             // 
-            // loginButton
+            // LoginButton
             // 
-            this.loginButton.BackColor = System.Drawing.Color.Transparent;
-            this.loginButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("loginButton.BackgroundImage")));
-            this.loginButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.loginButton.ForeColor = System.Drawing.Color.Transparent;
-            this.loginButton.Location = new System.Drawing.Point(857, 416);
-            this.loginButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(120, 85);
-            this.loginButton.TabIndex = 2;
-            this.loginButton.UseVisualStyleBackColor = false;
-            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            this.LoginButton.BackColor = System.Drawing.Color.Transparent;
+            this.LoginButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("LoginButton.BackgroundImage")));
+            this.LoginButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.LoginButton.ForeColor = System.Drawing.Color.Transparent;
+            this.LoginButton.Location = new System.Drawing.Point(857, 416);
+            this.LoginButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.LoginButton.Name = "LoginButton";
+            this.LoginButton.Size = new System.Drawing.Size(120, 85);
+            this.LoginButton.TabIndex = 2;
+            this.LoginButton.UseVisualStyleBackColor = false;
+            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
-            // usernameTextBox
+            // UserTextBox
             // 
-            this.usernameTextBox.Cursor = System.Windows.Forms.Cursors.Default;
-            this.usernameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernameTextBox.Location = new System.Drawing.Point(187, 169);
-            this.usernameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.Size = new System.Drawing.Size(611, 30);
-            this.usernameTextBox.TabIndex = 4;
-            this.usernameTextBox.TextChanged += new System.EventHandler(this.UsernameTextBox_TextChanged);
+            this.UserTextBox.Cursor = System.Windows.Forms.Cursors.Default;
+            this.UserTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserTextBox.Location = new System.Drawing.Point(187, 169);
+            this.UserTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.UserTextBox.Name = "UserTextBox";
+            this.UserTextBox.Size = new System.Drawing.Size(611, 30);
+            this.UserTextBox.TabIndex = 4;
+            this.UserTextBox.TextChanged += new System.EventHandler(this.UsernameTextBox_TextChanged);
             // 
-            // passwordTextBox
+            // PwsdTextBox
             // 
-            this.passwordTextBox.Cursor = System.Windows.Forms.Cursors.Default;
-            this.passwordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordTextBox.Location = new System.Drawing.Point(187, 231);
-            this.passwordTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.PasswordChar = '*';
-            this.passwordTextBox.Size = new System.Drawing.Size(611, 30);
-            this.passwordTextBox.TabIndex = 5;
+            this.PwsdTextBox.Cursor = System.Windows.Forms.Cursors.Default;
+            this.PwsdTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PwsdTextBox.Location = new System.Drawing.Point(187, 231);
+            this.PwsdTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PwsdTextBox.Name = "PwsdTextBox";
+            this.PwsdTextBox.PasswordChar = '*';
+            this.PwsdTextBox.Size = new System.Drawing.Size(611, 30);
+            this.PwsdTextBox.TabIndex = 5;
             // 
-            // authLabel
+            // AuthLabel
             // 
-            this.authLabel.AutoSize = true;
-            this.authLabel.Location = new System.Drawing.Point(309, 284);
-            this.authLabel.Name = "authLabel";
-            this.authLabel.Size = new System.Drawing.Size(0, 17);
-            this.authLabel.TabIndex = 9;
-            this.authLabel.UseWaitCursor = true;
-            this.authLabel.Visible = false;
-            this.authLabel.Click += new System.EventHandler(this.Label1_Click_2);
+            this.AuthLabel.AutoSize = true;
+            this.AuthLabel.Location = new System.Drawing.Point(309, 284);
+            this.AuthLabel.Name = "AuthLabel";
+            this.AuthLabel.Size = new System.Drawing.Size(0, 17);
+            this.AuthLabel.TabIndex = 9;
+            this.AuthLabel.UseWaitCursor = true;
+            this.AuthLabel.Visible = false;
+            this.AuthLabel.Click += new System.EventHandler(this.AuthLabel_Click_2);
             // 
-            // populationLabel
+            // PopCounterLabel
             // 
-            this.populationLabel.AutoSize = true;
-            this.populationLabel.BackColor = System.Drawing.Color.Transparent;
-            this.populationLabel.Font = new System.Drawing.Font("Impress BT", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.populationLabel.ForeColor = System.Drawing.Color.Black;
-            this.populationLabel.Location = new System.Drawing.Point(252, 465);
-            this.populationLabel.Name = "populationLabel";
-            this.populationLabel.Size = new System.Drawing.Size(138, 35);
-            this.populationLabel.TabIndex = 11;
-            this.populationLabel.Text = "population";
-            this.populationLabel.UseWaitCursor = true;
-            this.populationLabel.Click += new System.EventHandler(this.Label2_Click);
+            this.PopCounterLabel.AutoSize = true;
+            this.PopCounterLabel.BackColor = System.Drawing.Color.Transparent;
+            this.PopCounterLabel.Font = new System.Drawing.Font("Impress BT", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PopCounterLabel.ForeColor = System.Drawing.Color.Black;
+            this.PopCounterLabel.Location = new System.Drawing.Point(252, 465);
+            this.PopCounterLabel.Name = "PopCounterLabel";
+            this.PopCounterLabel.Size = new System.Drawing.Size(138, 35);
+            this.PopCounterLabel.TabIndex = 11;
+            this.PopCounterLabel.Text = "population";
+            this.PopCounterLabel.UseWaitCursor = true;
+            this.PopCounterLabel.Click += new System.EventHandler(this.PopCounterLabel_Click);
             // 
-            // label1
+            // PwsdLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Impress BT", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.InactiveBorder;
-            this.label1.Location = new System.Drawing.Point(19, 230);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 30);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Password:";
-            this.label1.Click += new System.EventHandler(this.Label1_Click_3);
+            this.PwsdLabel.AutoSize = true;
+            this.PwsdLabel.BackColor = System.Drawing.Color.Transparent;
+            this.PwsdLabel.Font = new System.Drawing.Font("Impress BT", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PwsdLabel.ForeColor = System.Drawing.SystemColors.InactiveBorder;
+            this.PwsdLabel.Location = new System.Drawing.Point(19, 230);
+            this.PwsdLabel.Name = "PwsdLabel";
+            this.PwsdLabel.Size = new System.Drawing.Size(119, 30);
+            this.PwsdLabel.TabIndex = 13;
+            this.PwsdLabel.Text = "Password:";
+            this.PwsdLabel.Click += new System.EventHandler(this.PwsdLabel_Click_3);
             // 
-            // label2
+            // UserLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Impress BT", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.InactiveBorder;
-            this.label2.Location = new System.Drawing.Point(17, 166);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(123, 30);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Username:";
+            this.UserLabel.AutoSize = true;
+            this.UserLabel.BackColor = System.Drawing.Color.Transparent;
+            this.UserLabel.Font = new System.Drawing.Font("Impress BT", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserLabel.ForeColor = System.Drawing.SystemColors.InactiveBorder;
+            this.UserLabel.Location = new System.Drawing.Point(17, 166);
+            this.UserLabel.Name = "UserLabel";
+            this.UserLabel.Size = new System.Drawing.Size(123, 30);
+            this.UserLabel.TabIndex = 14;
+            this.UserLabel.Text = "Username:";
             // 
-            // label3
+            // TitleLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Impress BT", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(243, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(486, 54);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Open Toontown Launcher";
-            this.label3.Click += new System.EventHandler(this.Label3_Click);
+            this.TitleLabel.AutoSize = true;
+            this.TitleLabel.BackColor = System.Drawing.Color.Transparent;
+            this.TitleLabel.Font = new System.Drawing.Font("Impress BT", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleLabel.Location = new System.Drawing.Point(243, 9);
+            this.TitleLabel.Name = "TitleLabel";
+            this.TitleLabel.Size = new System.Drawing.Size(486, 54);
+            this.TitleLabel.TabIndex = 15;
+            this.TitleLabel.Text = "Open Toontown Launcher";
+            this.TitleLabel.Click += new System.EventHandler(this.TitleLabel_Click);
             // 
-            // label4
+            // DescLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Impress BT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(307, 64);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(388, 25);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "An open source unoffical Toontown launcher";
+            this.DescLabel.AutoSize = true;
+            this.DescLabel.BackColor = System.Drawing.Color.Transparent;
+            this.DescLabel.Font = new System.Drawing.Font("Impress BT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DescLabel.Location = new System.Drawing.Point(307, 64);
+            this.DescLabel.Name = "DescLabel";
+            this.DescLabel.Size = new System.Drawing.Size(388, 25);
+            this.DescLabel.TabIndex = 16;
+            this.DescLabel.Text = "An open source unoffical Toontown launcher";
             // 
-            // label5
+            // PopLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Impress BT", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(3, 464);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(244, 35);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "Current Population:";
-            this.label5.Click += new System.EventHandler(this.Label5_Click);
+            this.PopLabel.AutoSize = true;
+            this.PopLabel.BackColor = System.Drawing.Color.Transparent;
+            this.PopLabel.Font = new System.Drawing.Font("Impress BT", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PopLabel.Location = new System.Drawing.Point(3, 464);
+            this.PopLabel.Name = "PopLabel";
+            this.PopLabel.Size = new System.Drawing.Size(244, 35);
+            this.PopLabel.TabIndex = 17;
+            this.PopLabel.Text = "Current Population:";
+            this.PopLabel.Click += new System.EventHandler(this.PopLabel_Click);
             // 
-            // instructionsButton
+            // InstructionsButton
             // 
-            this.instructionsButton.BackColor = System.Drawing.Color.White;
-            this.instructionsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.instructionsButton.Font = new System.Drawing.Font("Impress BT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.instructionsButton.ForeColor = System.Drawing.Color.Black;
-            this.instructionsButton.Location = new System.Drawing.Point(429, 340);
-            this.instructionsButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.instructionsButton.Name = "instructionsButton";
-            this.instructionsButton.Size = new System.Drawing.Size(129, 38);
-            this.instructionsButton.TabIndex = 18;
-            this.instructionsButton.Text = "Instructions";
-            this.instructionsButton.UseVisualStyleBackColor = false;
-            this.instructionsButton.Click += new System.EventHandler(this.instructionsButton_Click);
+            this.InstructionsButton.BackColor = System.Drawing.Color.White;
+            this.InstructionsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.InstructionsButton.Font = new System.Drawing.Font("Impress BT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InstructionsButton.ForeColor = System.Drawing.Color.Black;
+            this.InstructionsButton.Location = new System.Drawing.Point(429, 340);
+            this.InstructionsButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.InstructionsButton.Name = "InstructionsButton";
+            this.InstructionsButton.Size = new System.Drawing.Size(129, 38);
+            this.InstructionsButton.TabIndex = 18;
+            this.InstructionsButton.Text = "Instructions";
+            this.InstructionsButton.UseVisualStyleBackColor = false;
+            this.InstructionsButton.Click += new System.EventHandler(this.InstructionsButton_Click);
             // 
-            // button1
+            // SaveAcctButton
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.Font = new System.Drawing.Font("Impress BT", 10F);
-            this.button1.Location = new System.Drawing.Point(187, 284);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(139, 37);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Save Account";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.SaveAcctButton.BackColor = System.Drawing.Color.White;
+            this.SaveAcctButton.Font = new System.Drawing.Font("Impress BT", 10F);
+            this.SaveAcctButton.Location = new System.Drawing.Point(187, 284);
+            this.SaveAcctButton.Margin = new System.Windows.Forms.Padding(4);
+            this.SaveAcctButton.Name = "SaveAcctButton";
+            this.SaveAcctButton.Size = new System.Drawing.Size(139, 37);
+            this.SaveAcctButton.TabIndex = 19;
+            this.SaveAcctButton.Text = "Save Account";
+            this.SaveAcctButton.UseVisualStyleBackColor = false;
+            this.SaveAcctButton.Click += new System.EventHandler(this.SaveAcctButton_Click);
             // 
-            // button2
+            // QuickLoginButton
             // 
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.Font = new System.Drawing.Font("Impress BT", 10F);
-            this.button2.Location = new System.Drawing.Point(501, 284);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(128, 37);
-            this.button2.TabIndex = 20;
-            this.button2.Text = "QuickLogin";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            this.QuickLoginButton.BackColor = System.Drawing.Color.White;
+            this.QuickLoginButton.Font = new System.Drawing.Font("Impress BT", 10F);
+            this.QuickLoginButton.Location = new System.Drawing.Point(501, 284);
+            this.QuickLoginButton.Margin = new System.Windows.Forms.Padding(4);
+            this.QuickLoginButton.Name = "QuickLoginButton";
+            this.QuickLoginButton.Size = new System.Drawing.Size(128, 37);
+            this.QuickLoginButton.TabIndex = 20;
+            this.QuickLoginButton.Text = "QuickLogin";
+            this.QuickLoginButton.UseVisualStyleBackColor = false;
+            this.QuickLoginButton.Click += new System.EventHandler(this.QuickLoginButton_Click);
             // 
-            // comboBox1
+            // QuickLoginComboBox
             // 
-            this.comboBox1.BackColor = System.Drawing.Color.White;
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(637, 300);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(160, 24);
-            this.comboBox1.TabIndex = 21;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
+            this.QuickLoginComboBox.BackColor = System.Drawing.Color.White;
+            this.QuickLoginComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.QuickLoginComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.QuickLoginComboBox.FormattingEnabled = true;
+            this.QuickLoginComboBox.Location = new System.Drawing.Point(637, 300);
+            this.QuickLoginComboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.QuickLoginComboBox.Name = "QuickLoginComboBox";
+            this.QuickLoginComboBox.Size = new System.Drawing.Size(160, 24);
+            this.QuickLoginComboBox.TabIndex = 21;
+            this.QuickLoginComboBox.SelectedIndexChanged += new System.EventHandler(this.QuickLoginComboBox_SelectedIndexChanged);
             // 
-            // label6
+            // QuickLoginLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.label6.Font = new System.Drawing.Font("Impress BT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(645, 274);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(142, 21);
-            this.label6.TabIndex = 22;
-            this.label6.Text = "Select An Account";
-            this.label6.Click += new System.EventHandler(this.Label6_Click);
+            this.QuickLoginLabel.AutoSize = true;
+            this.QuickLoginLabel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.QuickLoginLabel.Font = new System.Drawing.Font("Impress BT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QuickLoginLabel.Location = new System.Drawing.Point(645, 274);
+            this.QuickLoginLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.QuickLoginLabel.Name = "QuickLoginLabel";
+            this.QuickLoginLabel.Size = new System.Drawing.Size(142, 21);
+            this.QuickLoginLabel.TabIndex = 22;
+            this.QuickLoginLabel.Text = "Select An Account";
+            this.QuickLoginLabel.Click += new System.EventHandler(this.QuickLoginLabel_Click);
             // 
-            // button3
+            // RemoveAcctButton
             // 
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.Font = new System.Drawing.Font("Impress BT", 10F);
-            this.button3.Location = new System.Drawing.Point(335, 284);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(157, 37);
-            this.button3.TabIndex = 23;
-            this.button3.Text = "Remove Account";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.Button3_Click);
+            this.RemoveAcctButton.BackColor = System.Drawing.Color.White;
+            this.RemoveAcctButton.Font = new System.Drawing.Font("Impress BT", 10F);
+            this.RemoveAcctButton.Location = new System.Drawing.Point(335, 284);
+            this.RemoveAcctButton.Margin = new System.Windows.Forms.Padding(4);
+            this.RemoveAcctButton.Name = "RemoveAcctButton";
+            this.RemoveAcctButton.Size = new System.Drawing.Size(157, 37);
+            this.RemoveAcctButton.TabIndex = 23;
+            this.RemoveAcctButton.Text = "Remove Account";
+            this.RemoveAcctButton.UseVisualStyleBackColor = false;
+            this.RemoveAcctButton.Click += new System.EventHandler(this.RemoveAcctButton_Click);
             // 
-            // button5
+            // GameDirButton
             // 
-            this.button5.BackColor = System.Drawing.Color.White;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button5.Font = new System.Drawing.Font("Impress BT", 10F);
-            this.button5.ForeColor = System.Drawing.Color.Black;
-            this.button5.Location = new System.Drawing.Point(9, 406);
-            this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(186, 38);
-            this.button5.TabIndex = 25;
-            this.button5.Text = "Set Game Directory";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.Button5_Click);
+            this.GameDirButton.BackColor = System.Drawing.Color.White;
+            this.GameDirButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.GameDirButton.Font = new System.Drawing.Font("Impress BT", 10F);
+            this.GameDirButton.ForeColor = System.Drawing.Color.Black;
+            this.GameDirButton.Location = new System.Drawing.Point(9, 406);
+            this.GameDirButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.GameDirButton.Name = "GameDirButton";
+            this.GameDirButton.Size = new System.Drawing.Size(186, 38);
+            this.GameDirButton.TabIndex = 25;
+            this.GameDirButton.Text = "Set Game Directory";
+            this.GameDirButton.UseVisualStyleBackColor = false;
+            this.GameDirButton.Click += new System.EventHandler(this.GameDirButton_Click);
             // 
             // OpenTTLauncher
             // 
-            this.AcceptButton = this.loginButton;
+            this.AcceptButton = this.LoginButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(989, 510);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.instructionsButton);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.populationLabel);
-            this.Controls.Add(this.authLabel);
-            this.Controls.Add(this.passwordTextBox);
-            this.Controls.Add(this.usernameTextBox);
-            this.Controls.Add(this.loginButton);
-            this.Controls.Add(this.linkLabel);
+            this.Controls.Add(this.GameDirButton);
+            this.Controls.Add(this.RemoveAcctButton);
+            this.Controls.Add(this.QuickLoginLabel);
+            this.Controls.Add(this.QuickLoginComboBox);
+            this.Controls.Add(this.QuickLoginButton);
+            this.Controls.Add(this.SaveAcctButton);
+            this.Controls.Add(this.InstructionsButton);
+            this.Controls.Add(this.PopLabel);
+            this.Controls.Add(this.DescLabel);
+            this.Controls.Add(this.TitleLabel);
+            this.Controls.Add(this.UserLabel);
+            this.Controls.Add(this.PwsdLabel);
+            this.Controls.Add(this.PopCounterLabel);
+            this.Controls.Add(this.AuthLabel);
+            this.Controls.Add(this.PwsdTextBox);
+            this.Controls.Add(this.UserTextBox);
+            this.Controls.Add(this.LoginButton);
+            this.Controls.Add(this.LinkLabel);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -325,25 +325,25 @@ namespace OpenTTLauncher
 
         #endregion
 
-        private System.Windows.Forms.LinkLabel linkLabel;
-        private System.Windows.Forms.Button loginButton;
-        private System.Windows.Forms.TextBox usernameTextBox;
-        private System.Windows.Forms.TextBox passwordTextBox;
-        private System.Windows.Forms.Label authLabel;
-        private System.Windows.Forms.Label populationLabel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button instructionsButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.LinkLabel LinkLabel;
+        private System.Windows.Forms.Button LoginButton;
+        private System.Windows.Forms.TextBox UserTextBox;
+        private System.Windows.Forms.TextBox PwsdTextBox;
+        private System.Windows.Forms.Label AuthLabel;
+        private System.Windows.Forms.Label PopCounterLabel;
+        private System.Windows.Forms.Label PwsdLabel;
+        private System.Windows.Forms.Label UserLabel;
+        private System.Windows.Forms.Label TitleLabel;
+        private System.Windows.Forms.Label DescLabel;
+        private System.Windows.Forms.Label PopLabel;
+        private System.Windows.Forms.Button InstructionsButton;
+        private System.Windows.Forms.Button SaveAcctButton;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button QuickLoginButton;
+        private System.Windows.Forms.ComboBox QuickLoginComboBox;
+        private System.Windows.Forms.Label QuickLoginLabel;
+        private System.Windows.Forms.Button RemoveAcctButton;
+        private System.Windows.Forms.Button GameDirButton;
     }
 }
 
