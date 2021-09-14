@@ -174,9 +174,9 @@ namespace OpenTTLauncher
             }
         }
     }
+
     public static class LauncherProgram
     {
-
         public static void CreateQuickAccount(string usr, string pws)
         // Adds new QuickLogin account
         {
@@ -207,6 +207,7 @@ namespace OpenTTLauncher
                 };
                 json = JsonConvert.SerializeObject(columns);
             }
+
             // Check if user credentials are correct by sending a simple POST login request
             var data = new NameValueCollection();
             data["username"] = usr;
@@ -299,6 +300,7 @@ namespace OpenTTLauncher
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
                 // Convert keys (account usernames) to list.
                 List<string> accounts = new List<string>(json_Dictionary.Keys);
+                accounts.Insert(0, "");
                 return accounts;
             }
             else
