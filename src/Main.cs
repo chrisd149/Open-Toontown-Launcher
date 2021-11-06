@@ -182,7 +182,7 @@ namespace OpenTTLauncher
         // Adds new QuickLogin account
         {
             string json;
-            // If the json already exists, we have to get the data from it, convert it to a dictionary, modify the dictionary, and then create the json.
+            // If the user config has data, we have to get the data from it, convert it to a dictionary, modify the dictionary, and then return the dictionary to string.
             if (!string.IsNullOrEmpty(Convert.ToString(Properties.Settings.Default["Users"])))
             {
                 string jsonFile = Convert.ToString(Properties.Settings.Default["Users"]);
@@ -191,7 +191,7 @@ namespace OpenTTLauncher
                 {
                     if (usr == Convert.ToString(item))
                     {
-                        // User is already in json file.
+                        // User is already in user config.
                         MessageBox.Show($"User {usr} is already a QuickLogin user!", "Account Already Added");
                         return;
                     }
@@ -295,7 +295,7 @@ namespace OpenTTLauncher
             }
         }
         public static List<string> ReturnAccounts()
-        // Returns list of accounts in json.  Used to update dropdownlist of accounts.
+        // Returns list of accounts in user config.  Used to update dropdownlist of accounts.
         {
             if (!string.IsNullOrEmpty(Convert.ToString(Properties.Settings.Default["Users"])))
             {
@@ -313,11 +313,11 @@ namespace OpenTTLauncher
         }
 
         public static void RemoveUser(string usr)
-        // Removes selected account from json.
+        // Removes selected account from user config.
         {
             if (!string.IsNullOrEmpty(Convert.ToString(Properties.Settings.Default["Users"])))
             {
-                // Simular to adding a user, we must convert the file to dict and then back to json.
+                // Simular to adding a user, we must convert the file to dict and then back to user config.
                 string json = Convert.ToString(Properties.Settings.Default["Users"]);
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
                 bool usr_in_list = false;
