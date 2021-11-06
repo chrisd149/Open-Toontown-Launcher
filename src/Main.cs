@@ -133,6 +133,7 @@ namespace OpenTTLauncher
                     // Logins to game using credientials
                     Console.WriteLine("SUCCESS: Logging you in to the Tooniverse...");
                     Environment.SetEnvironmentVariable("TTR_GAMESERVER", Convert.ToString(json.gameserver));
+                    Console.WriteLine($"GAMESERVER: {Convert.ToString(json.gameserver)}");
                     Environment.SetEnvironmentVariable("TTR_PLAYCOOKIE", Convert.ToString(json.cookie));
                     string dir = Convert.ToString(Properties.Settings.Default["GameDirectory"]);
 
@@ -182,8 +183,9 @@ namespace OpenTTLauncher
         {
             string json;
             // If the json already exists, we have to get the data from it, convert it to a dictionary, modify the dictionary, and then create the json.
-            if (File.Exists(LocalGlobals.jsonFileLoc)){
-                string jsonFile = File.ReadAllText(LocalGlobals.jsonFileLoc);
+            if (!string.IsNullOrEmpty(Convert.ToString(Properties.Settings.Default["Users"])))
+            {
+                string jsonFile = Convert.ToString(Properties.Settings.Default["Users"]);
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(jsonFile);
                 foreach (var item in json_Dictionary.Keys)
                 {
@@ -222,7 +224,8 @@ namespace OpenTTLauncher
             }
 
             // Write json string to file
-            System.IO.File.WriteAllText(LocalGlobals.jsonFileLoc, json);
+            Convert.ToString(Properties.Settings.Default["Users"] = json);
+            Properties.Settings.Default.Save();
             MessageBox.Show($"Added {usr} to QuickLogin!", "Account Added");
         }
 
@@ -268,9 +271,9 @@ namespace OpenTTLauncher
                 MessageBox.Show($"No user was selected for QuickLogin!", "No Account Selected");
                 return;
             }
-            if (File.Exists(LocalGlobals.jsonFileLoc))
+            if (!string.IsNullOrEmpty(Convert.ToString(Properties.Settings.Default["Users"])))
             {
-                string json = File.ReadAllText(LocalGlobals.jsonFileLoc);
+                string json = Convert.ToString(Properties.Settings.Default["Users"]);
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
                 foreach (var item in json_Dictionary.Keys)
                 {
@@ -294,9 +297,9 @@ namespace OpenTTLauncher
         public static List<string> ReturnAccounts()
         // Returns list of accounts in json.  Used to update dropdownlist of accounts.
         {
-            if (File.Exists(LocalGlobals.jsonFileLoc))
+            if (!string.IsNullOrEmpty(Convert.ToString(Properties.Settings.Default["Users"])))
             {
-                string json = File.ReadAllText(LocalGlobals.jsonFileLoc);
+                string json = Convert.ToString(Properties.Settings.Default["Users"]);
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
                 // Convert keys (account usernames) to list.
                 List<string> accounts = new List<string>(json_Dictionary.Keys);
@@ -312,10 +315,10 @@ namespace OpenTTLauncher
         public static void RemoveUser(string usr)
         // Removes selected account from json.
         {
-            if (File.Exists(LocalGlobals.jsonFileLoc))
+            if (!string.IsNullOrEmpty(Convert.ToString(Properties.Settings.Default["Users"])))
             {
                 // Simular to adding a user, we must convert the file to dict and then back to json.
-                string json = File.ReadAllText(LocalGlobals.jsonFileLoc);
+                string json = Convert.ToString(Properties.Settings.Default["Users"]);
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
                 bool usr_in_list = false;
                 foreach (var item in json_Dictionary.Keys)
@@ -335,7 +338,8 @@ namespace OpenTTLauncher
                 {
                     json_Dictionary.Remove(usr);
                     json = JsonConvert.SerializeObject(json_Dictionary);
-                    System.IO.File.WriteAllText(LocalGlobals.jsonFileLoc, json);
+                    Properties.Settings.Default["Users"] = json;
+                    Properties.Settings.Default.Save();
                     MessageBox.Show($"Removed {usr} from QuickLogin!", "Account Removed");
                 }
             }

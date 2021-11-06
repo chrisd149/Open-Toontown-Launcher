@@ -34,5 +34,17 @@ namespace OpenTTLauncher.Properties {
                 this["GameDirectory"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Users {
+            get {
+                return ((string)(this["Users"]));
+            }
+            set {
+                this["Users"] = value;
+            }
+        }
     }
 }

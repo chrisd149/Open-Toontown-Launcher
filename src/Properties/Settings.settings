@@ -5,5 +5,8 @@
     <Setting Name="GameDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Program Files (x86)\Toontown Rewritten</Value>
     </Setting>
+    <Setting Name="Users" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
