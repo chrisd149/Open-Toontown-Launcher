@@ -63,7 +63,6 @@ namespace OpenTTLauncher
             this.LinkLabel.TabIndex = 0;
             this.LinkLabel.TabStop = true;
             this.LinkLabel.Text = "Github repository";
-            this.LinkLabel.UseWaitCursor = true;
             this.LinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
             // 
             // LoginButton
@@ -109,7 +108,6 @@ namespace OpenTTLauncher
             this.AuthLabel.Name = "AuthLabel";
             this.AuthLabel.Size = new System.Drawing.Size(0, 17);
             this.AuthLabel.TabIndex = 9;
-            this.AuthLabel.UseWaitCursor = true;
             this.AuthLabel.Visible = false;
             this.AuthLabel.Click += new System.EventHandler(this.AuthLabel_Click_2);
             // 
@@ -117,6 +115,7 @@ namespace OpenTTLauncher
             // 
             this.PopCounterLabel.AutoSize = true;
             this.PopCounterLabel.BackColor = System.Drawing.Color.Transparent;
+            this.PopCounterLabel.Cursor = System.Windows.Forms.Cursors.Default;
             this.PopCounterLabel.Font = new System.Drawing.Font("Impress BT", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PopCounterLabel.ForeColor = System.Drawing.Color.Black;
             this.PopCounterLabel.Location = new System.Drawing.Point(252, 465);
@@ -124,7 +123,6 @@ namespace OpenTTLauncher
             this.PopCounterLabel.Size = new System.Drawing.Size(138, 35);
             this.PopCounterLabel.TabIndex = 11;
             this.PopCounterLabel.Text = "population";
-            this.PopCounterLabel.UseWaitCursor = true;
             this.PopCounterLabel.Click += new System.EventHandler(this.PopCounterLabel_Click);
             // 
             // PwsdLabel
