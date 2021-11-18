@@ -2,7 +2,6 @@ using System;
 using System.Windows.Forms;
 using Globals;
 
-
 namespace OpenTTLauncher
 {
     public partial class OpenTTLauncher : Form
@@ -11,7 +10,6 @@ namespace OpenTTLauncher
         { 
             InitializeComponent();
             CurrentPopulation();
-            LocalGlobals.jsonFileLoc = $"{System.IO.Directory.GetCurrentDirectory()}\\quicklogin.json";
             VersionLabel.Text = $"v{Application.ProductVersion}";
             RefreshList();
         }
@@ -121,7 +119,6 @@ namespace OpenTTLauncher
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            
         }
 
         private void AuthLabel_Click_2(object sender, EventArgs e)
