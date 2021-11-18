@@ -119,7 +119,6 @@ namespace OpenTTLauncher
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            
         }
 
         private void AuthLabel_Click_2(object sender, EventArgs e)

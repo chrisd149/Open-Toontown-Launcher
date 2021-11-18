@@ -138,10 +138,13 @@ namespace OpenTTLauncher
                     string dir = Convert.ToString(Properties.Settings.Default["GameDirectory"]);
 
 
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    ProcessStartInfo startInfo = new ProcessStartInfo
+                    {
+                        FileName = "TTREngine.exe",
+                        WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden
+                    };
 
-                    startInfo.FileName = "TTREngine.exe";
-                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                    
                     try
                     {
                         Directory.SetCurrentDirectory(dir);
@@ -196,7 +199,7 @@ namespace OpenTTLauncher
                         return;
                     }
                 }
-           
+
                 // Adds user info to json
                 json_Dictionary.Add(usr, EncodePasswordToBase64(pws));
                 json = JsonConvert.SerializeObject(json_Dictionary);
@@ -211,9 +214,12 @@ namespace OpenTTLauncher
             }
 
             // Check if user credentials are correct by sending a simple POST login request
-            var data = new NameValueCollection();
-            data["username"] = usr;
-            data["password"] = pws;
+            var data = new NameValueCollection
+            {
+                ["username"] = usr,
+                ["password"] = pws
+            };
+            
             var login_process = WebRequest.HTTPPostClient(data);
             dynamic response_json = JObject.Parse(login_process);
 

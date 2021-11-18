@@ -1,3 +1,8 @@
+using System.Drawing.Text;
+using System.Drawing;
+using System.IO;
+using System;
+
 namespace OpenTTLauncher
 {
     partial class OpenTTLauncher
@@ -49,13 +54,16 @@ namespace OpenTTLauncher
             this.RemoveAcctButton = new System.Windows.Forms.Button();
             this.GameDirButton = new System.Windows.Forms.Button();
             this.VersionLabel = new System.Windows.Forms.Label();
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            pfc.AddFontFile(Path.Combine(Environment.CurrentDirectory, "ImpressBT.ttf"));
+            //Font font = new Font(pfc.Families[0], 12, FontStyle.Regular);
             this.SuspendLayout();
             // 
             // LinkLabel
             // 
             this.LinkLabel.AutoSize = true;
             this.LinkLabel.BackColor = System.Drawing.Color.Transparent;
-            this.LinkLabel.Font = new System.Drawing.Font("Impress BT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LinkLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F, FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LinkLabel.LinkColor = System.Drawing.Color.Navy;
             this.LinkLabel.Location = new System.Drawing.Point(419, 471);
             this.LinkLabel.Name = "LinkLabel";
@@ -116,7 +124,7 @@ namespace OpenTTLauncher
             this.PopCounterLabel.AutoSize = true;
             this.PopCounterLabel.BackColor = System.Drawing.Color.Transparent;
             this.PopCounterLabel.Cursor = System.Windows.Forms.Cursors.Default;
-            this.PopCounterLabel.Font = new System.Drawing.Font("Impress BT", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PopCounterLabel.Font = new System.Drawing.Font(pfc.Families[0], 16.2F, FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PopCounterLabel.ForeColor = System.Drawing.Color.Black;
             this.PopCounterLabel.Location = new System.Drawing.Point(252, 465);
             this.PopCounterLabel.Name = "PopCounterLabel";
@@ -129,7 +137,7 @@ namespace OpenTTLauncher
             // 
             this.PwsdLabel.AutoSize = true;
             this.PwsdLabel.BackColor = System.Drawing.Color.Transparent;
-            this.PwsdLabel.Font = new System.Drawing.Font("Impress BT", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PwsdLabel.Font = new System.Drawing.Font(pfc.Families[0], 13.8F, FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PwsdLabel.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.PwsdLabel.Location = new System.Drawing.Point(19, 230);
             this.PwsdLabel.Name = "PwsdLabel";
@@ -142,7 +150,7 @@ namespace OpenTTLauncher
             // 
             this.UserLabel.AutoSize = true;
             this.UserLabel.BackColor = System.Drawing.Color.Transparent;
-            this.UserLabel.Font = new System.Drawing.Font("Impress BT", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserLabel.Font = new System.Drawing.Font(pfc.Families[0], 13.8F, FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UserLabel.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.UserLabel.Location = new System.Drawing.Point(17, 166);
             this.UserLabel.Name = "UserLabel";
@@ -154,7 +162,7 @@ namespace OpenTTLauncher
             // 
             this.TitleLabel.AutoSize = true;
             this.TitleLabel.BackColor = System.Drawing.Color.Transparent;
-            this.TitleLabel.Font = new System.Drawing.Font("Impress BT", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleLabel.Font = new System.Drawing.Font(pfc.Families[0], 25.8F, FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TitleLabel.Location = new System.Drawing.Point(243, 9);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(486, 54);
@@ -166,7 +174,7 @@ namespace OpenTTLauncher
             // 
             this.DescLabel.AutoSize = true;
             this.DescLabel.BackColor = System.Drawing.Color.Transparent;
-            this.DescLabel.Font = new System.Drawing.Font("Impress BT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DescLabel.Font = new System.Drawing.Font(pfc.Families[0], 12F, FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DescLabel.Location = new System.Drawing.Point(307, 64);
             this.DescLabel.Name = "DescLabel";
             this.DescLabel.Size = new System.Drawing.Size(388, 25);
@@ -177,7 +185,7 @@ namespace OpenTTLauncher
             // 
             this.PopLabel.AutoSize = true;
             this.PopLabel.BackColor = System.Drawing.Color.Transparent;
-            this.PopLabel.Font = new System.Drawing.Font("Impress BT", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PopLabel.Font = new System.Drawing.Font(pfc.Families[0], 16.2F, FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PopLabel.Location = new System.Drawing.Point(3, 464);
             this.PopLabel.Name = "PopLabel";
             this.PopLabel.Size = new System.Drawing.Size(244, 35);
@@ -189,7 +197,7 @@ namespace OpenTTLauncher
             // 
             this.InstructionsButton.BackColor = System.Drawing.Color.White;
             this.InstructionsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.InstructionsButton.Font = new System.Drawing.Font("Impress BT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InstructionsButton.Font = new System.Drawing.Font(pfc.Families[0], 12F, FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InstructionsButton.ForeColor = System.Drawing.Color.Black;
             this.InstructionsButton.Location = new System.Drawing.Point(429, 340);
             this.InstructionsButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -203,7 +211,7 @@ namespace OpenTTLauncher
             // SaveAcctButton
             // 
             this.SaveAcctButton.BackColor = System.Drawing.Color.White;
-            this.SaveAcctButton.Font = new System.Drawing.Font("Impress BT", 10F);
+            this.SaveAcctButton.Font = new System.Drawing.Font(pfc.Families[0], 10F);
             this.SaveAcctButton.Location = new System.Drawing.Point(187, 284);
             this.SaveAcctButton.Margin = new System.Windows.Forms.Padding(4);
             this.SaveAcctButton.Name = "SaveAcctButton";
@@ -216,7 +224,7 @@ namespace OpenTTLauncher
             // QuickLoginButton
             // 
             this.QuickLoginButton.BackColor = System.Drawing.Color.White;
-            this.QuickLoginButton.Font = new System.Drawing.Font("Impress BT", 10F);
+            this.QuickLoginButton.Font = new System.Drawing.Font(pfc.Families[0], 10F);
             this.QuickLoginButton.Location = new System.Drawing.Point(501, 284);
             this.QuickLoginButton.Margin = new System.Windows.Forms.Padding(4);
             this.QuickLoginButton.Name = "QuickLoginButton";
@@ -243,7 +251,7 @@ namespace OpenTTLauncher
             // 
             this.QuickLoginLabel.AutoSize = true;
             this.QuickLoginLabel.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.QuickLoginLabel.Font = new System.Drawing.Font("Impress BT", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QuickLoginLabel.Font = new System.Drawing.Font(pfc.Families[0], 9.75F, FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.QuickLoginLabel.Location = new System.Drawing.Point(645, 274);
             this.QuickLoginLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.QuickLoginLabel.Name = "QuickLoginLabel";
@@ -255,7 +263,7 @@ namespace OpenTTLauncher
             // RemoveAcctButton
             // 
             this.RemoveAcctButton.BackColor = System.Drawing.Color.White;
-            this.RemoveAcctButton.Font = new System.Drawing.Font("Impress BT", 10F);
+            this.RemoveAcctButton.Font = new System.Drawing.Font(pfc.Families[0], 10F);
             this.RemoveAcctButton.Location = new System.Drawing.Point(335, 284);
             this.RemoveAcctButton.Margin = new System.Windows.Forms.Padding(4);
             this.RemoveAcctButton.Name = "RemoveAcctButton";
@@ -269,7 +277,7 @@ namespace OpenTTLauncher
             // 
             this.GameDirButton.BackColor = System.Drawing.Color.White;
             this.GameDirButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.GameDirButton.Font = new System.Drawing.Font("Impress BT", 10F);
+            this.GameDirButton.Font = new System.Drawing.Font(pfc.Families[0], 10F);
             this.GameDirButton.ForeColor = System.Drawing.Color.Black;
             this.GameDirButton.Location = new System.Drawing.Point(9, 406);
             this.GameDirButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -284,7 +292,7 @@ namespace OpenTTLauncher
             // 
             this.VersionLabel.AutoSize = true;
             this.VersionLabel.BackColor = System.Drawing.Color.Transparent;
-            this.VersionLabel.Font = new System.Drawing.Font("Impress BT", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VersionLabel.Font = new System.Drawing.Font(pfc.Families[0], 7.8F, FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VersionLabel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.VersionLabel.Location = new System.Drawing.Point(943, -1);
             this.VersionLabel.Name = "VersionLabel";
