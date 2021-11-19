@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Globals;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
+using System.Security.Cryptography;
 
 
 namespace OpenTTLauncher
@@ -19,10 +20,6 @@ namespace OpenTTLauncher
     {
         public static void Login(string usr, string pws, string responseStatus = "none")
         {
-            //Set username and password as globals
-            LocalGlobals.usr = usr;
-            LocalGlobals.pws = LauncherProgram.EncodePasswordToBase64(pws);
-
             // Checks for username and password
             if (string.IsNullOrEmpty(usr) || string.IsNullOrEmpty(pws))
             {
@@ -31,6 +28,10 @@ namespace OpenTTLauncher
             }
             else
             {
+                // Set username and password as globals for future use
+                LocalGlobals.usr = usr;
+                LocalGlobals.pws = LauncherProgram.EncodePasswordToBase64(pws);
+
                 var data = new NameValueCollection();
 
                 // Enters login queue
@@ -58,7 +59,7 @@ namespace OpenTTLauncher
                     // Intial POST to login
                     case "none":
                         data["username"] = usr;
-                        data["password"] = pws;
+                        data["password"] = LauncherProgram.DecodeFrom64(LocalGlobals.pws);
                         break;
                 }
                 // Sends POST response
@@ -105,7 +106,7 @@ namespace OpenTTLauncher
             {
                 case "false":
                     LocalGlobals.banner = json.banner;
-                    Login(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
+                    Login(LocalGlobals.usr, LauncherProgram.DecodeFrom64(LocalGlobals.pws), Convert.ToString(json.success));
                     break;
                 case "delayed":
                     // Adds 1 second to delay
@@ -114,7 +115,7 @@ namespace OpenTTLauncher
 
                     // Sends another POST request with the queueToken only
                     LocalGlobals.queueToken = json.queueToken;
-                    Login(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
+                    Login(LocalGlobals.usr, LauncherProgram.DecodeFrom64(LocalGlobals.pws), Convert.ToString(json.success));
                     break;
                 case "partial":
                     LocalGlobals.banner = json.banner;
@@ -124,7 +125,7 @@ namespace OpenTTLauncher
 
                     // Sends another POST request with the authToken and responseToken only
                     LocalGlobals.responseToken = json.responseToken;
-                    Login(LocalGlobals.usr, LocalGlobals.pws, Convert.ToString(json.success));
+                    Login(LocalGlobals.usr, LauncherProgram.DecodeFrom64(LocalGlobals.pws), Convert.ToString(json.success));
                     break;
                 case "true":
                     LocalGlobals.timeToWait = 0;
@@ -208,7 +209,7 @@ namespace OpenTTLauncher
             {
                 var columns = new Dictionary<string, string>
                 {
-                    {usr, EncodePasswordToBase64(pws)},
+                    {usr, Convert.ToString(EncodePasswordToBase64(pws))},
                 };
                 json = JsonConvert.SerializeObject(columns);
             }
@@ -236,35 +237,25 @@ namespace OpenTTLauncher
         }
 
         public static string EncodePasswordToBase64(string password)
-        // Encodes passwords stored to hopefully reduce issues.
-        //
-        // This isn't very secure, but I haven't found a way of making a more
-        // secure password encoder without frying my brain.
+        // Encodes passwords with the standard encryption protocol the user's OS supports (probably AES).
         {
             try
             {
-                byte[] encData_byte = new byte[password.Length];
-                encData_byte = System.Text.Encoding.UTF8.GetBytes(password);
-                string encodedData = Convert.ToBase64String(encData_byte);
-                return encodedData;
+                byte[] encryptedData =  ProtectedData.Protect(System.Text.Encoding.UTF8.GetBytes(password), null, DataProtectionScope.CurrentUser);
+                Console.WriteLine(System.Text.Encoding.UTF8.GetString(encryptedData));
+                return Convert.ToBase64String(encryptedData); 
             }
             catch (Exception ex)
             {
-                throw new Exception("Error in base64Encode" + ex.Message);
+                throw new Exception("Error in encoding password" + ex.Message);
             }
         }
 
         public static string DecodeFrom64(string encodedPassword)
         // Decodes stored passwords to be used for login.
         {
-            System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
-            System.Text.Decoder utf8Decode = encoder.GetDecoder();
-            byte[] todecode_byte = Convert.FromBase64String(encodedPassword);
-            int charCount = utf8Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
-            char[] decoded_char = new char[charCount];
-            utf8Decode.GetChars(todecode_byte, 0, todecode_byte.Length, decoded_char, 0);
-            string result = new String(decoded_char);
-            return result;
+            byte[] decryptedData = ProtectedData.Unprotect(Convert.FromBase64String(encodedPassword), null, DataProtectionScope.CurrentUser);
+            return System.Text.Encoding.UTF8.GetString(decryptedData);
         }
 
         public static void QuickLogin(string usr)
@@ -281,13 +272,13 @@ namespace OpenTTLauncher
             {
                 string json = Convert.ToString(Properties.Settings.Default["Users"]);
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
-                foreach (var item in json_Dictionary.Keys)
+                foreach (var item in json_Dictionary)
                 {
-                    if (usr == Convert.ToString(item))
+                    if (usr == Convert.ToString(item.Key))
                     {
                         // Found the account, get it's password and login.
-                        object pws = json_Dictionary[usr];
-                        string decoded_pws = DecodeFrom64(Convert.ToString(pws));
+                        object pws = item.Value;
+                        string decoded_pws = DecodeFrom64(Convert.ToString(item.Value));
                         WebRequest.Login(Convert.ToString(usr), decoded_pws);
                         return;
                     }
